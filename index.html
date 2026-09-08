@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMBG3 Morning Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4f0; --surface:#fffdfa; --surface-2:#f1ede6;
+  --ink:#0d2a33; --ink-2:#1c3f4a; --body:#24343b; --muted:#5f7278; --faint:#8a999e;
+  --rule:#ddd6cb; --rule-2:#c3b8a9; --hair:#e7e1d7;
+  --teal:#0f6e78; --teal-2:#0b545c; --teal-soft:#e2efef;
+  --sienna:#a94e1d; --sienna-soft:#f8e9dd;
+  --brick:#92241d; --brick-soft:#f8e3e0;
+  --shadow:0 1px 2px rgba(13,42,51,.06),0 8px 24px -16px rgba(13,42,51,.28);
+  --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b191e; --surface:#112329; --surface-2:#162d34;
+    --ink:#e9eff1; --ink-2:#d1dee1; --body:#b6c6cb; --muted:#84989e; --faint:#6b7f86;
+    --rule:#22404a; --rule-2:#335c68; --hair:#1c353d;
+    --teal:#57c3ca; --teal-2:#7ad3d8; --teal-soft:#123338;
+    --sienna:#e28d55; --sienna-soft:#33221a;
+    --brick:#e5817a; --brick-soft:#381e1c;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b191e; --surface:#112329; --surface-2:#162d34;
+  --ink:#e9eff1; --ink-2:#d1dee1; --body:#b6c6cb; --muted:#84989e; --faint:#6b7f86;
+  --rule:#22404a; --rule-2:#335c68; --hair:#1c353d;
+  --teal:#57c3ca; --teal-2:#7ad3d8; --teal-soft:#123338;
+  --sienna:#e28d55; --sienna-soft:#33221a;
+  --brick:#e5817a; --brick-soft:#381e1c;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--body);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:Spectral,Georgia,"Times New Roman",serif;color:var(--ink);font-weight:600;line-height:1.2;margin:0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--teal) 35%,transparent)}
+a:hover{border-bottom-color:var(--teal)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:3px double var(--rule-2);background:var(--surface);}
+.mast-in{max-width:var(--maxw);margin:0 auto;padding:30px 24px 22px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.mast h1{font-size:clamp(30px,5.4vw,46px);letter-spacing:-.017em;margin:8px 0 0}
+.mast h1 em{font-style:italic;color:var(--teal-2);font-weight:400}
+.mast-sub{margin-top:12px;padding-top:12px;border-top:1px solid var(--hair);display:flex;flex-wrap:wrap;gap:8px 26px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted)}
+.mast-sub b{color:var(--ink-2);font-weight:600}
+.mast-note{margin-top:14px;font-size:13.5px;color:var(--muted);border-left:2px solid var(--sienna);padding-left:12px;max-width:70ch}
+.themebtn{position:absolute;top:16px;right:20px;background:var(--surface-2);color:var(--muted);border:1px solid var(--rule);border-radius:999px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;padding:6px 12px;cursor:pointer}
+.themebtn:hover{color:var(--ink);border-color:var(--rule-2)}
+.mast{position:relative}
+
+/* ---------- nav ---------- */
+nav.sticky{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:saturate(1.5) blur(9px);border-bottom:1px solid var(--rule)}
+nav.sticky .wrap{display:flex;gap:2px;overflow-x:auto;padding-top:0;padding-bottom:0;scrollbar-width:thin}
+nav.sticky a{flex:0 0 auto;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:11px 11px;border-bottom:2px solid transparent;white-space:nowrap}
+nav.sticky a:hover{color:var(--ink);border-bottom-color:var(--teal);background:var(--surface-2)}
+
+/* ---------- section frames ---------- */
+section{padding:40px 0 8px;scroll-margin-top:52px}
+.sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:7px;margin-bottom:6px}
+.sec-head h2{font-size:23px;letter-spacing:-.01em;flex:1}
+.sec-head .count{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);letter-spacing:.1em}
+.sec-blurb{font-size:13.5px;color:var(--muted);margin:10px 0 4px;max-width:76ch}
+
+/* ---------- docket entries ---------- */
+.docket{border-top:1px solid var(--hair)}
+.entry{display:grid;grid-template-columns:168px 1fr;gap:0 26px;padding:20px 0;border-bottom:1px solid var(--hair);align-items:start}
+.entry:hover{background:color-mix(in srgb,var(--surface) 55%,transparent)}
+.rail{border-right:1px solid var(--rule);padding-right:22px;min-height:100%}
+.rail .d{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);font-weight:600;letter-spacing:.01em;line-height:1.45}
+.rail .meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);margin-top:7px;line-height:1.55;word-break:break-word}
+.badge{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;padding:3px 7px;border-radius:2px;margin-top:9px;background:var(--teal-soft);color:var(--teal-2);border:1px solid color-mix(in srgb,var(--teal) 28%,transparent)}
+.badge.b-enf{background:var(--brick-soft);color:var(--brick);border-color:color-mix(in srgb,var(--brick) 30%,transparent)}
+.badge.b-date{background:var(--sienna-soft);color:var(--sienna);border-color:color-mix(in srgb,var(--sienna) 32%,transparent)}
+.badge.b-neg{background:var(--surface-2);color:var(--muted);border-color:var(--rule)}
+.body h3{font-size:17.5px;line-height:1.32;letter-spacing:-.006em;margin-bottom:7px}
+.body p{margin:0 0 9px}
+.why{border-left:2px solid var(--teal);padding:2px 0 2px 12px;margin:11px 0 9px;font-size:14px;color:var(--ink-2)}
+.why b{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:2px;font-weight:600}
+.cite{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);margin-top:8px}
+.cite a{color:var(--teal-2)}
+.flag{display:block;background:var(--sienna-soft);border-left:3px solid var(--sienna);padding:8px 12px;margin:10px 0 4px;font-size:12.5px;color:var(--ink-2)}
+.flag b{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sienna);font-weight:600}
+@media(max-width:720px){
+  .entry{grid-template-columns:1fr;gap:0}
+  .rail{border-right:none;border-left:2px solid var(--rule);padding:0 0 0 12px;margin-bottom:12px}
+  .badge{margin-top:6px}
+}
+</style>
+<style>
+/* ---------- lead items ---------- */
+.leads{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-top:1px solid var(--hair)}
+.lead{border-bottom:1px solid var(--hair);border-right:1px solid var(--hair);padding:20px 22px 18px;position:relative}
+.lead:hover{background:var(--surface)}
+.lead .ln{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;color:var(--faint);font-weight:600}
+.lead h3{font-size:17px;line-height:1.3;margin:6px 0 8px}
+.lead p{margin:0;font-size:14px}
+.lead .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;padding:2px 7px;border-radius:2px;margin-top:11px;margin-right:5px;background:var(--surface-2);color:var(--muted);border:1px solid var(--rule)}
+.lead .tag.hot{background:var(--brick-soft);color:var(--brick);border-color:color-mix(in srgb,var(--brick) 30%,transparent)}
+.lead .tag.clock{background:var(--sienna-soft);color:var(--sienna);border-color:color-mix(in srgb,var(--sienna) 32%,transparent)}
+
+/* ---------- dates docket ---------- */
+.dwrap{overflow-x:auto;border-top:1px solid var(--hair)}
+table.dates{width:100%;border-collapse:collapse;min-width:660px}
+table.dates th{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--rule-2);font-weight:600}
+table.dates td{padding:11px 12px 11px 0;border-bottom:1px solid var(--hair);vertical-align:top;font-size:14px}
+table.dates td.dt{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink);font-weight:600;white-space:nowrap}
+table.dates td.rem{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap;text-align:right;padding-right:18px}
+table.dates td.src{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint)}
+tr.urgent td{background:var(--sienna-soft)}
+tr.urgent td.dt,tr.urgent td.rem{color:var(--sienna)}
+tr.today td{background:var(--brick-soft)}
+tr.today td.dt,tr.today td.rem{color:var(--brick)}
+.legend{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);margin:10px 0 0;display:flex;gap:18px;flex-wrap:wrap}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:baseline}
+
+/* ---------- pitches ---------- */
+.pitch{display:grid;grid-template-columns:84px 1fr;gap:0 22px;padding:26px 0;border-bottom:1px solid var(--hair);align-items:start}
+.pnum{font-family:Spectral,serif;font-size:62px;line-height:.85;font-weight:700;color:var(--rule-2);letter-spacing:-.04em}
+.pitch:hover .pnum{color:var(--teal)}
+.pitch h3{font-size:20px;line-height:1.26;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 8px;border-radius:2px;background:var(--surface-2);color:var(--muted);border:1px solid var(--rule)}
+.chip.fmt{background:var(--teal-soft);color:var(--teal-2);border-color:color-mix(in srgb,var(--teal) 28%,transparent)}
+.chip.exp{background:var(--sienna-soft);color:var(--sienna);border-color:color-mix(in srgb,var(--sienna) 32%,transparent)}
+.pblock{margin:9px 0}
+.pblock b{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-right:8px}
+.works{margin-top:12px;padding-top:10px;border-top:1px dotted var(--rule-2);font-size:13.5px;color:var(--muted);font-style:italic}
+.bench{border-top:1px solid var(--rule-2);margin-top:8px;padding-top:16px}
+.bench h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.bench li{margin-bottom:8px;font-size:14px}
+.bench li b{color:var(--ink-2);font-family:Spectral,serif;font-size:15px}
+@media(max-width:720px){.pitch{grid-template-columns:1fr}.pnum{font-size:40px;margin-bottom:6px}}
+
+/* ---------- notices / quiet / footer ---------- */
+.notice{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--brick);padding:14px 18px;margin:14px 0 4px;font-size:13.5px;color:var(--ink-2);border-radius:2px}
+.notice b{color:var(--brick)}
+.quiet{border-top:1px solid var(--hair)}
+.qrow{display:grid;grid-template-columns:210px 1fr;gap:0 24px;padding:12px 0;border-bottom:1px solid var(--hair);align-items:start}
+.qk{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);font-weight:600;border-right:1px solid var(--rule);padding-right:20px}
+.qv{font-size:13.5px;color:var(--muted)}
+.qv code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:2px;color:var(--ink-2);border:1px solid var(--hair)}
+@media(max-width:720px){.qrow{grid-template-columns:1fr}.qk{border-right:none;border-left:2px solid var(--rule);padding:0 0 0 10px;margin-bottom:6px}}
+footer{margin-top:44px;border-top:3px double var(--rule-2);background:var(--surface)}
+footer .wrap{padding-top:26px;padding-bottom:38px}
+footer h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+footer p,footer li{font-size:13px;color:var(--muted);margin:0 0 8px}
+footer ul{padding-left:18px;margin:0 0 14px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 36px}
+.colophon{margin-top:20px;padding-top:14px;border-top:1px solid var(--hair);font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="mast">
+  <button class="themebtn" id="tbtn" type="button">THEME</button>
+  <div class="mast-in">
+    <div class="kicker">CMBG3 Law &middot; Regulatory &amp; Litigation Desk</div>
+    <h1>Morning Brief <em>&mdash; Tuesday, September 8, 2026</em></h1>
+    <div class="mast-sub">
+      <span><b>Window</b> Mon Sep 7, 8:00 am &rarr; Tue Sep 8, 8:30 am ET</span>
+      <span><b>Span</b> 24.5 hours</span>
+      <span><b>Reviewed</b> ~140 candidate items, 8 beats</span>
+      <span><b>Reported</b> 30</span>
+      <span><b>Flagged</b> 20</span>
+      <span><b>Live dates carried</b> 60</span><span><b>Sections omitted</b> 2</span>
+    </div>
+    <div class="mast-note"><b>How this edition joins to the last one.</b> The window picks up exactly where the Labor Day edition of September 7 closed. Federal agencies reopened this morning and the first Federal Register issue since Friday published today, so the genuinely new material is thin and is reported as thin. Six items below are dated September 1&ndash;6 and are carried anyway because the September 7 edition did not reach them &mdash; each says so in place. Items that edition already covered in full are not repeated here; where they carry a live date they appear in the docket only, and the reclassification countdown continues at <b>eight days</b>.</div>
+  </div>
+</div>
+
+<nav class="sticky"><div class="wrap">
+  <a href="#lead">What matters</a>
+  <a href="#dates">Dates</a>
+  <a href="#publish">Worth publishing</a>
+  <a href="#epa">EPA &amp; environmental</a>
+  <a href="#fda">FDA</a>
+  <a href="#device">Devices &amp; QMSR</a>
+  <a href="#tort">Toxic tort</a>
+  <a href="#emp">Employment</a>
+  <a href="#dc">Data centers</a>
+  <a href="#emerging">Emerging</a>
+  <a href="#congress">Congress</a>
+  <a href="#ai">AI &amp; practice</a>
+  <a href="#quiet">Quiet</a>
+</div></nav>
+<div class="wrap">
+
+<section id="lead">
+  <div class="sec-head"><h2>What matters most</h2><span class="count">6 items</span></div>
+  <p class="sec-blurb">The items that would change what someone at the firm does today. Four of the six were missed by the September 7 edition rather than being new this morning &mdash; that is stated on each, and they are led with because nobody at the firm has seen them yet.</p>
+  <div class="leads">
+
+    <div class="lead">
+      <div class="ln">01</div>
+      <h3>An insurer walks away from a PFAS defense on an occupational-disease exclusion &mdash; not a pollution exclusion</h3>
+      <p>The Northern District of Ohio held that Admiral owes Fire-Dex nothing on the PFAS suits over its firefighter turnout gear. The exclusion that did the work was occupational disease, in two CGL policies.</p>
+      <span class="tag hot">Coverage</span><span class="tag">Sep 4 &mdash; not in the last edition</span><span class="tag">Single-source, verify</span>
+    </div>
+
+    <div class="lead">
+      <div class="ln">02</div>
+      <h3>Humana opens a Medicare Secondary Payer front against Bayer</h3>
+      <p>A Medicare Advantage plan sued Monsanto/Bayer in D.N.J. to recover what it paid for members allegedly injured by Roundup, seeking double damages under the MSP Act &mdash; filed while Bayer works to close a reported $7.25&nbsp;billion global settlement.</p>
+      <span class="tag hot">Mass tort</span><span class="tag">Sep 4 &mdash; not in the last edition</span><span class="tag">Single-source, verify</span>
+    </div>
+
+    <div class="lead">
+      <div class="ln">03</div>
+      <h3>The contract bar narrows: a missing effective date costs a CBA its protection</h3>
+      <p>The Board held 2&ndash;1 that a collective bargaining agreement lacking a clear effective date does not bar a decertification petition, reversing the Regional Director. Published in the weekly summary that posted yesterday &mdash; the first NLRB output the desk has been able to read since early August.</p>
+      <span class="tag">Labor</span><span class="tag">New in window</span><span class="tag">Management-side</span>
+    </div>
+
+    <div class="lead">
+      <div class="ln">04</div>
+      <h3>The D.C. Circuit has settled PFOA and PFOS as CERCLA hazardous substances</h3>
+      <p>A unanimous panel rejected the industry challenge to EPA's &sect;&nbsp;102(a) designation on every ground. Allocation and cost-recovery exposure across the PFAS supply chain is now operating on a confirmed footing.</p>
+      <span class="tag hot">CERCLA</span><span class="tag">Decided Aug 18 &mdash; not in the last edition</span>
+    </div>
+
+    <div class="lead">
+      <div class="ln">05</div>
+      <h3>649 generators, and a live fight over whether they are one source</h3>
+      <p>The September 7 edition cut the NC DEQ generator permits as pre-window. The substance is worth carrying: SELC's objection is that co-located Amazon and Duke units are a single Clean Air Act stationary source, which is the aggregation question every data center permit now faces.</p>
+      <span class="tag">Data centers</span><span class="tag">Clean Air Act</span><span class="tag">Carried with detail</span>
+    </div>
+
+    <div class="lead">
+      <div class="ln">06</div>
+      <h3>One carried-forward date conflict resolves; the reclassification clock reads eight days</h3>
+      <p>The Galleri advisory-committee dates reconcile: <b class="mono">September 8</b> (today) is the cutoff for comments guaranteed to reach the panel, and <b class="mono">September 16</b> is the docket close. They were never competing dates. The ISH/FISH down-classification still takes effect <b class="mono">September 16</b>, verified again this morning against the Federal Register.</p>
+      <span class="tag clock">Today</span><span class="tag">Conflict resolved</span><span class="tag">8 days</span>
+    </div>
+
+  </div>
+</section>
+
+<section id="dates">
+  <div class="sec-head"><h2>Comment deadlines and dates</h2><span class="count">60 live dates</span></div>
+  <p class="sec-blurb">The firm's running docket, soonest first, counted from today. Every still-open date from the September 7 edition is carried forward; nine are new this cycle and marked <b>new</b>. Where the prior edition recorded a sourcing caveat it is preserved rather than quietly dropped. <span class="mono">quoted</span> means taken verbatim from a DATES section; <span class="mono">calculated</span> or <span class="mono">secondary</span> means arithmetic, a listing page or commentary &mdash; confirm before a client acts on it.</p>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--brick)"></span>Today</span>
+    <span><span class="sw" style="background:var(--sienna)"></span>Inside one week</span>
+  </div>
+  <div class="dwrap">
+  <table class="dates">
+    <thead><tr><th>Date</th><th>What closes or takes effect</th><th>Authority</th><th style="text-align:right;padding-right:18px">Left</th></tr></thead>
+    <tbody>
+      <tr class="today"><td class="dt">Tue Sep 8</td><td><b>Today.</b> TRO blocking the Town of Westlake, Texas from voting on its data center development agreement, "extended through September 8, 2026." <span class="mono" style="font-size:10.5px">calculated / carried &mdash; still unverified, no case name, judge or cause number</span></td><td class="src">Carried forward</td><td class="rem">0 d</td></tr>
+      <tr class="today"><td class="dt">Tue Sep 8</td><td><b>Today.</b> Last day for comments guaranteed to reach the Molecular and Clinical Genetics Panel before its September 23 Galleri review. <span class="mono" style="font-size:10.5px">quoted &mdash; and see the note below: this is the delivery-guarantee cutoff, not the docket close</span></td><td class="src">FDA-2026-N-8004 &middot; <a href="https://www.fda.gov/advisory-committees/advisory-committee-calendar/september-23-2026-molecular-and-clinical-genetics-panel-medical-devices-advisory-committee-meeting">FDA</a></td><td class="rem">0 d</td></tr>
+      <tr class="urgent"><td class="dt">Wed Sep 9</td><td>Benton County, Missouri &mdash; developer's land closing date in the data center moratorium TRO fight. No ruling at the September 2 hearing and no new court date set. <span class="mono" style="font-size:10.5px">secondary &mdash; single source, no caption or docket</span></td><td class="src">Carried forward</td><td class="rem">1 d</td></tr>
+      <tr class="urgent"><td class="dt">Thu Sep 10</td><td>Sentencing of Second Engineer Mikhail Tsurikov, Act to Prevent Pollution from Ships (E.D. Pa.). <span class="mono" style="font-size:10.5px">calculated &mdash; the year is not stated verbatim in the DOJ release</span></td><td class="src">Carried forward</td><td class="rem">2 d</td></tr>
+      <tr class="urgent"><td class="dt">Fri Sep 11</td><td>EPA Farm, Ranch and Rural Communities Advisory Committee virtual meeting, approx. 11:00 am&ndash;5:00 pm ET. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">91 FR 56653 &middot; <a href="https://www.federalregister.gov/documents/2026/09/03/2026-18069/farm-ranch-and-rural-communities-advisory-committee-frrcc-notice-of-public-meeting">FR</a></td><td class="rem">3 d</td></tr>
+      <tr class="urgent"><td class="dt">Fri Sep 11</td><td><b>new</b> &mdash; New York Times response due on the order to show cause why its case should not be stayed, OpenAI copyright MDL.</td><td class="src">MDL 25-md-03143 (S.D.N.Y.)</td><td class="rem">3 d</td></tr>
+      <tr class="urgent"><td class="dt">Sun Sep 13 <span style="font-weight:400">or</span> Mon Sep 14</td><td><b>Comment close</b> &mdash; <i>United States v. Passaic Valley Water Commission</i>, proposed consent decree. Safe Drinking Water Act; uncovered reservoir water under 40 CFR 141.714; $132,500 penalty plus feasibility studies. <span class="mono" style="font-size:10.5px">DATE CONFLICT, UNRESOLVED across three editions: the FR's own thirty-day clause computes to Sep 13; DOJ's ENRD listing states Sep 14. Treat Sep 13 as operative.</span></td><td class="src">FR 2026-16676 &middot; 2:26-cv-10199 (D.N.J.) &middot; <a href="https://www.justice.gov/enrd/consent-decrees">ENRD</a></td><td class="rem">5&ndash;6 d</td></tr>
+      <tr class="urgent"><td class="dt">Mon Sep 14</td><td>Senate reconvenes for legislative business, 3:00 pm; cloture vote on a judicial nomination approx. 5:30 pm. House district work period ends September 13. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.dailypress.senate.gov/">Senate Daily Press</a></td><td class="rem">6 d</td></tr>
+      <tr class="urgent"><td class="dt">Tue Sep 15</td><td><b>Reporting deadline</b> &mdash; Minnesota PFAS product reporting to the MPCA via PRISM, 11:59 pm CDT, with fee. Covers any product sold or distributed in Minnesota with intentionally added PFAS. <span class="mono" style="font-size:10.5px">secondary &mdash; the one date on this page most likely to reach a client as advice. Confirm with MPCA directly.</span></td><td class="src"><a href="https://natlawreview.com/article/minnesotas-september-15-2026-pfas-reporting-deadline-fast-approaching">Bergeson &amp; Campbell via NLR</a></td><td class="rem">7 d</td></tr>
+      <tr class="urgent"><td class="dt">Tue Sep 15</td><td>Marion County, Florida &mdash; second public hearing on a 12-month data center moratorium. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">7 d</td></tr>
+      <tr><td class="dt">Wed Sep 16</td><td><b>Effective &mdash; <i>Riegel</i> express preemption ends that day for these product codes.</b> ISH test systems for use with a corresponding approved oncology therapeutic, Class III &rarr; Class II with special controls. Codes MVD, NYQ, OWE, PNK. <span class="mono" style="font-size:10.5px">quoted &middot; re-confirmed against the FR API again this morning (publication Aug 17; 21 CFR Part 864)</span></td><td class="src">FR 2026-16727 &middot; FDA-2025-N-1243 &middot; <a href="https://www.federalregister.gov/documents/2026/08/17/2026-16727/hematology-and-pathology-devices-reclassification-of-in-situ-hybridization-test-systems-for-use-with">FR</a></td><td class="rem">8 d</td></tr>
+      <tr><td class="dt">Wed Sep 16</td><td><b>Docket comment close</b>, 11:59 pm ET &mdash; Galleri advisory committee docket. <span class="mono" style="font-size:10.5px">CONFLICT PARTLY RESOLVED this cycle: Sep 8 and Sep 16 are not competing dates &mdash; Sep 8 is the delivery guarantee, Sep 16 the docket close. The Sep 17 figure read from the FR meeting notice in a prior cycle remains unreconciled; Sep 16 stays the safe date.</span></td><td class="src">FDA-2026-N-8004 &middot; FR 2026-16245</td><td class="rem">8 d</td></tr>
+      <tr><td class="dt">Thu Sep 17</td><td><b>Comment close</b> &mdash; <i>United States v. Old Dutch Mustard Co.</i>, proposed consent decree. Clean Water Act stormwater to the Souhegan River, NH; $50,000 plus monitoring and an updated SWPPP. <span class="mono" style="font-size:10.5px">re-confirmed</span></td><td class="src">FR 2026-16775 &middot; 1:26-cv-00655</td><td class="rem">9 d</td></tr>
+      <tr><td class="dt">Fri Sep 18</td><td>FTC personalized-pricing comment window closes. Same day: New York workplace violence prevention law takes effect for hospitals and nursing homes (N.Y. Pub. Health Law &sect; 2832). <span class="mono" style="font-size:10.5px">secondary &mdash; both from management-side firm checklists</span></td><td class="src">Carried forward</td><td class="rem">10 d</td></tr>
+      <tr><td class="dt">Fri Sep 18</td><td><b>new</b> &mdash; NERC comment deadline: Registry Criteria revisions and Computational Load Reliability Standards for large data center loads. Same day: defendants' reply due in the OpenAI MDL show-cause briefing. <span class="mono" style="font-size:10.5px">secondary &mdash; NERC dates come from a law-firm regulatory update, not a NERC notice. Confirm.</span></td><td class="src"><a href="https://www.stoel.com/insights/reports/energy-regulatory-updates/september-2-2026">Stoel Rives</a></td><td class="rem">10 d</td></tr>
+      <tr><td class="dt">Fri Sep 18</td><td><b>new</b> &mdash; Comment period closes, Draft EIS, Homeland Defense Over-the-Horizon Radar, Northwest Region (OR), USAF. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/09/08/2026-18198/environmental-impact-statements-availability-etc">FR 2026-18198</a></td><td class="rem">10 d</td></tr>
+      <tr><td class="dt">Mon Sep 21</td><td><b>Effective &mdash; three OFCCP dates converge:</b> the Section 503 final rule (RIN 1250-AA18), the VEVRAA final rule (RIN 1250-AA19), and the August 31 VEVRAA technical correction. The VEVRAA jurisdictional floor rises from $150,000 to $200,000. <span class="mono" style="font-size:10.5px">quoted &mdash; pull the corrected CFR text, not the August 21 print</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/21/2026-17115/modifications-to-the-regulations-implementing-section-503-of-the-rehabilitation-act-of-1973-as">&sect; 503</a> &middot; <a href="https://www.federalregister.gov/documents/2026/08/21/2026-17116/modifications-to-the-regulations-implementing-the-vietnam-era-veterans-readjustment-assistance-act">VEVRAA</a></td><td class="rem">13 d</td></tr>
+      <tr><td class="dt">Mon Sep 21</td><td>EBSA group health plan electronic-delivery NPRM comments close (RIN 1210-AC35). Same day: EPA comment deadline on the proposed settlement of the unreasonable-delay claim on the neonicotinoid tolerance petition. Same day: BLM response due to the IBLA in the Boulder City, Nevada data center appeals. <span class="mono" style="font-size:10.5px">quoted for the first two; carried forward for IBLA</span></td><td class="src">EBSA-2026-0331 &middot; EPA-HQ-OGC-2026-6172</td><td class="rem">13 d</td></tr>
+      <tr><td class="dt">Tue Sep 22</td><td>North Port, Florida &mdash; second reading and final vote on a retroactive 18-month data center moratorium. <span class="mono" style="font-size:10.5px">no ordinance number retrieved</span></td><td class="src">Carried forward</td><td class="rem">14 d</td></tr>
+      <tr><td class="dt">~Wed Sep 23</td><td><b>Comment close</b> &mdash; <i>United States v. Real Estate Remediation, LLC</i> et al., proposed partial consent decree. CERCLA; Goodrich Asbestos Superfund Site, Miami, Oklahoma; $20,000. <span class="mono" style="font-size:10.5px">CALCULATED from the publication date, not quoted as a calendar date</span></td><td class="src">FR 2026-17200 &middot; 4:25-cv-00289</td><td class="rem">15 d</td></tr>
+      <tr><td class="dt">Wed Sep 23</td><td>Molecular and Clinical Genetics Panel &mdash; GRAIL Galleri multi-cancer early detection test, 9:00 am&ndash;6:00 pm ET, hybrid. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.fda.gov/advisory-committees/advisory-committee-calendar/september-23-2026-molecular-and-clinical-genetics-panel-medical-devices-advisory-committee-meeting">FDA</a></td><td class="rem">15 d</td></tr>
+      <tr><td class="dt">Thu Sep 24</td><td><b>Hearing session</b> &mdash; JPML, Thorne Auditorium, Chicago, argument 9:30 am. Device matters on the argument calendar: <b>MDL 3194</b> (Abbott spinal cord stimulators) and <b>MDL 3195</b> (Nevro). Same day: EPA comment deadline, Glyphosate Open Literature Search. Same day: <b>new</b> &mdash; NERC Disturbance Performance Standards comments. <span class="mono" style="font-size:10.5px">quoted for JPML</span></td><td class="src"><a href="https://www.jpml.uscourts.gov/sites/jpml/files/Hearing%20Session%20Filed_September%202026.pdf">JPML hearing order</a></td><td class="rem">16 d</td></tr>
+      <tr><td class="dt">Fri Sep 25</td><td>FDA public meeting: Regulatory Science Innovations Catalyzing Medical Device Development. <span class="mono" style="font-size:10.5px">title only &mdash; not quoted from a DATES section</span></td><td class="src"><a href="https://www.fda.gov/medical-devices/medical-devices-news-and-events/regulatory-science-innovations-catalyzing-medical-device-development-09252026">CDRH</a></td><td class="rem">17 d</td></tr>
+      <tr><td class="dt">Mon Sep 28</td><td><b>Comment close</b> &mdash; EEOC federal sector EEO proposed rule (RIN 3046-AB46). Ends mandatory pre-complaint counseling, restricts AJ proceedings to appeals, bars administrative adjudication of class complaints. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/28/2026-17641/federal-sector-equal-employment-opportunity">FR 2026-17641</a></td><td class="rem">20 d</td></tr>
+      <tr><td class="dt">Tue Sep 29</td><td>Florida HB 433 changes apply "to contracts entered into after September 29." <span class="mono" style="font-size:10.5px">secondary; the year is inferred from context</span></td><td class="src">Carried forward</td><td class="rem">21 d</td></tr>
+      <tr><td class="dt">Wed Sep 30</td><td><b>Effective</b> &mdash; DOL rescission of 29 CFR pt. 42, the ETA/WHD/OSHA coordinated enforcement regulations for migrant and seasonal farmworkers. Same day: California Governor's action deadline on workplace bills and the data center package. <span class="mono" style="font-size:10.5px">quoted for the DOL rescission; the California deadline is carried forward and unchecked</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/31/2026-17726/rescission-of-coordinated-enforcement-regulations">FR 2026-17726</a></td><td class="rem">22 d</td></tr>
+      <tr><td class="dt">Thu Oct 1</td><td><b>Compliance &mdash; CONNECTICUT AI, CONFLICTED.</b> Stage-one obligations under the Connecticut AI Responsibility and Transparency Act, including a reported duty to disclose in WARN notices whether a reduction is "related to the employer's use of artificial intelligence or another technological change." <span class="mono" style="font-size:10.5px">SOURCE CONFLICT, UNRESOLVED ACROSS THREE CYCLES. One line of sourcing places the WARN duty here; another at the Oct 1, 2027 stage. Confirm against Conn. P.A. 26-15 before any client alert.</span></td><td class="src"><a href="https://ogletree.com/insights-resources/blog-posts/new-connecticut-law-restricts-employer-ai-use-mandates-notice-for-ai-caused-rifs/">Ogletree</a> &middot; <a href="https://www.fisherphillips.com/en/insights/insights/connecticut-employers-need-to-prepare-for-new-workplace-ai-law">Fisher Phillips</a></td><td class="rem">23 d</td></tr>
+      <tr><td class="dt">Thu Oct 1</td><td>OSHA: five information collections close at OMB the same day &mdash; construction fall protection criteria and training; conflict of interest and disclosure; the Voluntary Protection Program; presence sensing device initiation; aerial lifts. Same day: EPA Colorado Smelter Superfund (Pueblo) comments close on lower lead cleanup levels &mdash; residential soil 350 &rarr; 240 ppm, indoor dust 275 &rarr; 110 ppm. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">23 d</td></tr>
+      <tr><td class="dt">Sun Oct 4</td><td>Claim and opt-out deadline, <i>Hudson v. Palm Beach Tan, Inc.</i>, $2.5M TCPA settlement (M.D.N.C.). <span class="mono" style="font-size:10.5px">secondary, unverified</span></td><td class="src"><a href="https://natlawreview.com/article/what-stop-request-palm-beach-tan-pay-25mm-settle-tcpa-suit-text-messages-sent-after">NLR</a></td><td class="rem">26 d</td></tr>
+      <tr><td class="dt">Mon Oct 5</td><td>Scoping comments due on three BLM NEPA actions: Southern Ute Mancos Shale programmatic EIS, Silver Rock Transmission Line EIS, and the Vernal RMP amendment (Ouray National Wildlife Refuge). <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/09/04/2026-18106/intent-to-prepare-a-programmatic-environmental-impact-statement-for-southern-ute-mancos-shale">FR 2026-18106</a> &amp; rel.</td><td class="rem">27 d</td></tr>
+      <tr><td class="dt">Fri Oct 9</td><td><b>Down-classification comments close</b> &mdash; digital breast tomosynthesis systems, proposed Class III &rarr; Class II (FDA-2026-N-7630). FDA proposes any final order take effect 30 days after publication. <span class="mono" style="font-size:10.5px">quoted &mdash; second of three reclassifications in motion; same preemption consequence as the ISH order</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/07/2026-16209/radiology-devices-reclassification-of-digital-breast-tomosynthesis-systems">FR 2026-16209</a></td><td class="rem">31 d</td></tr>
+      <tr><td class="dt">Sat Oct 10</td><td>Escondido, California &mdash; staff report and regulatory recommendations due to City Council on the AI data center moratorium; the 45-day urgency ordinance otherwise lapses. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">32 d</td></tr>
+      <tr><td class="dt">Tue Oct 13</td><td>Objection and exclusion deadline, <i>Guzman v. Dr. Squatch, LLC</i>, No. 25STCV03523 &mdash; $9M "natural" labeling settlement. <span class="mono" style="font-size:10.5px">quoted from the class notice</span></td><td class="src"><a href="https://www.prnewswire.com/news-releases/if-you-purchased-certain-dr-squatch-products-from-november-1-2018-through-august-29-2026-you-could-be-eligible-for-payment-from-a-class-action-settlement-302863248.html">Class notice</a></td><td class="rem">35 d</td></tr>
+      <tr><td class="dt">Fri Oct 16</td><td><b>Two FDA device comment periods close.</b> Reclassification of diagnostic endoscopic light source systems, to be renamed cystoscopic systems for bladder cancer detection (code OAY), Class III &rarr; Class II (FDA-2026-N-8249) &mdash; the third reclassification in motion. And the proposed distinct Class I classification of seven accessories (FDA-2025-N-6224). <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/17/2026-16729/medical-devices-classification-of-accessories-distinct-from-other-devices-proposed-list-of">FR 2026-16729</a> &amp; rel.</td><td class="rem">38 d</td></tr>
+      <tr><td class="dt">Mon Oct 19</td><td><b>Comment close</b> &mdash; EPA proposed rule excluding vessels not secured to the seabed from the NPDES "discharge of a pollutant" definition. <span class="mono" style="font-size:10.5px">quoted. The public hearing date is referenced but NOT stated in DATES and remains unretrieved across three cycles &mdash; it needs a read of the full SUPPLEMENTARY INFORMATION.</span></td><td class="src">91 FR 56819 &middot; EPA-HQ-OW-2026-6965 &middot; <a href="https://www.federalregister.gov/documents/2026/09/04/2026-18134/updates-to-the-national-pollutant-discharge-elimination-system-definitions-and-exclusions">FR</a></td><td class="rem">41 d</td></tr>
+      <tr><td class="dt">Mon Oct 19</td><td>Comments close, EPA Ethylene Dibromide draft risk evaluation under TSCA. Same day: feedback due on the CDRH generative-AI device discussion paper (FDA-2026-N-7874). Same day: <b>new</b> &mdash; comment period closes, Draft Supplement EIS, Northwest Training and Testing (WA). <span class="mono" style="font-size:10.5px">quoted for EDB and the EIS; confirm the CDRH date against the FR notice</span></td><td class="src"><a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/considerations-regulation-generative-ai-enabled-medical-devices-discussion-paper-and-request">CDRH</a> &middot; <a href="https://www.federalregister.gov/documents/2026/09/08/2026-18198/environmental-impact-statements-availability-etc">FR 2026-18198</a></td><td class="rem">41 d</td></tr>
+      <tr><td class="dt">Tue Oct 20</td><td>Comments close, OSHA Cadmium in General Industry Standard information collection, 29 CFR 1910.1027 (OMB 1218-0185). <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">OSHA-2012-0005</td><td class="rem">42 d</td></tr>
+      <tr><td class="dt">Mon Oct 26</td><td><b>Effective</b> &mdash; OFCCP rescission of the Executive Order 11246 implementing regulations; 41 CFR pts. 60-1, 60-2, 60-3, 60-4, 60-20, 60-40 and 60-999 removed. Same day: comments close on EPA's <i>trans</i>-1,2-dichloroethylene draft risk evaluation. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/08/21/2026-17114/rescission-of-executive-order-11246-implementing-regulations">FR 2026-17114</a></td><td class="rem">48 d</td></tr>
+      <tr><td class="dt">Tue Oct 27</td><td>Objections and hearing requests due on EPA's pesticide tolerance exemption for sucrose palmitate/stearate surfactant. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Carried forward</td><td class="rem">49 d</td></tr>
+      <tr><td class="dt">Fri Oct 30</td><td>Comments close, FDA paperwork burden estimate for 21 CFR pt. 806, Reports of Corrections and Removals &mdash; 1,408 responses and 12,116 hours (OMB 0910-0359). Corrections and removals is one of the four "Other Applicable FDA Requirements" under Compliance Program 7382.850. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Carried forward</td><td class="rem">52 d</td></tr>
+      <tr><td class="dt">Mon Nov 2</td><td><b>new</b> &mdash; Comment period closes, Draft EIS, Shore Road Bridge over the Hutchinson River (NY), FHWA. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src"><a href="https://www.federalregister.gov/documents/2026/09/08/2026-18198/environmental-impact-statements-availability-etc">FR 2026-18198</a></td><td class="rem">55 d</td></tr>
+      <tr><td class="dt">Tue Nov 3</td><td><b>Comment close</b> &mdash; EPA draft TSCA risk evaluation for 1,2-dichloropropane. EPA preliminarily finds 11 conditions of use significantly contribute to unreasonable risk to workers and occupational non-users, plus three consumer uses, and characterizes the substance as "likely to be carcinogenic to humans." <span class="mono" style="font-size:10.5px">quoted &middot; re-confirmed</span></td><td class="src">91 FR 56882 &middot; EPA-HQ-OPPT-2018-0428 &middot; <a href="https://www.federalregister.gov/documents/2026/09/04/2026-18117/draft-risk-evaluation-under-the-toxic-substances-control-act-12-dichloropropane">FR</a></td><td class="rem">56 d</td></tr>
+      <tr><td class="dt">Tue Nov 3</td><td>Comments close, FDA request for information on botanical drug product development. Same day: EPA heavy-duty engine and vehicle emissions information collection renewal. <span class="mono" style="font-size:10.5px">quoted &middot; re-confirmed</span></td><td class="src">FR 2026-18133 &middot; FDA-2026-N-9550</td><td class="rem">56 d</td></tr>
+      <tr><td class="dt">Mon Nov 16</td><td>MISO states it will file additional large-load proposals at FERC, following its August 28 filing on interconnection reliability requirements. <span class="mono" style="font-size:10.5px">MISO's own milestone, not a FERC comment deadline &mdash; check eLibrary before calendaring</span></td><td class="src">Carried forward</td><td class="rem">69 d</td></tr>
+      <tr><td class="dt">Tue Nov 17</td><td>Expected finalization of EPA's draft Contaminant Candidate List 6 &mdash; the first CCL to include <b>microplastics</b>, alongside pharmaceuticals, PFAS and disinfection byproducts. A research-prioritization listing rather than a regulation, but the first federal listing is the citation point. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">70 d</td></tr>
+      <tr><td class="dt">Fri Nov 27</td><td>Claim filing deadline, <i>Guzman v. Dr. Squatch</i> &mdash; $0.50 per product, capped at 20 with proof and 5 without. Same day: comments close on draft GFI #256B, compounding animal drugs from bulk substances under CGMP. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Class notice</td><td class="rem">80 d</td></tr>
+      <tr><td class="dt">Tue Dec 1</td><td>Comments close, FDA draft guidance on pharmacokinetics in patients with impaired hepatic function &mdash; withdraws the May 2003 guidance. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Carried forward</td><td class="rem">84 d</td></tr>
+      <tr><td class="dt">Fri Dec 4</td><td>MISO's requested effective date for large-load interconnection reliability requirements. Ride-through and ramp obligations become tariff duties &mdash; a compliance-failure theory pleadable against operators whose UPS or battery storage configurations trip during grid disturbances. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">87 d</td></tr>
+      <tr><td class="dt">Tue Dec 8</td><td><b>new</b> &mdash; Deadline to request to testify at public hearings on the pending Federal Rules amendments. <span class="mono" style="font-size:10.5px">secondary &mdash; from the U.S. Courts rules page; confirm the hearing schedule</span></td><td class="src"><a href="https://www.uscourts.gov/rules-policies">U.S. Courts</a></td><td class="rem">91 d</td></tr>
+      <tr><td class="dt">Fri Dec 11</td><td><b>The legislative-risk date to calendar.</b> Two clocks expire together: H.R. 6500 funds the government through December 11 and, at Division B &sect; 2005, extends TSCA fee authority to the same date. The December package is the vehicle to watch for anything riding on must-pass legislation &mdash; including, plausibly, litigation funding disclosure. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">94 d</td></tr>
+      <tr><td class="dt">Mon Dec 21</td><td><b>Effective</b> &mdash; OFCCP Section 503 amendatory instruction 1 (41 CFR pt. 60-30, hearing procedures). <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">RIN 1250-AA18</td><td class="rem">104 d</td></tr>
+      <tr><td class="dt">~Thu Dec 24</td><td>DOE implementing rules under Executive Order 14421 (foreign-produced bulk-power system equipment; the findings expressly cite data center and AI load growth). Required "within 120 days." <span class="mono" style="font-size:10.5px">CALCULATED</span></td><td class="src">Carried forward</td><td class="rem">~107 d</td></tr>
+      <tr><td class="dt">Fri Jan 1, 2027</td><td><b>Effective</b> &mdash; Colorado AI Act obligations begin (S.B. 26-189): pre-use notice, notice within 30 days of an adverse decision, a right to meaningful human review and reconsideration, three-year record retention. Reported penalties up to $20,000 per violation. <span class="mono" style="font-size:10.5px">secondary &mdash; multiple stale dates circulate. The AG has said it will not enforce pending completion of rulemaking, so this is a statutory effective date, not necessarily a live enforcement date.</span></td><td class="src"><a href="https://leg.colorado.gov/bills/sb26-189">Colorado GA</a> &middot; <a href="https://www.littler.com/news-analysis/asap/colorado-amends-its-artificial-intelligence-law-substantially-reducing">Littler</a></td><td class="rem">115 d</td></tr>
+      <tr><td class="dt">Thu Jan 28, 2027</td><td>NEPA judicial review bar for five FHWA/FDOT Florida highway projects: a claim "will be barred unless the claim is filed on or before January 28, 2027." <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Carried forward</td><td class="rem">142 d</td></tr>
+      <tr><td class="dt">Mon Feb 15, 2027</td><td>Federal Rules public comment period closes &mdash; Appellate Rule 25; Bankruptcy Rules 2003, 5005, 8011, 9006, 9036, 9037; Civil Rules 5, 5.2, 6, 55; Criminal Rules 11, 32, 45, 49, 49.1; and <b>Evidence Rules 104 and 902</b>. <span class="mono" style="font-size:10.5px">quoted &mdash; the Evidence Rules items are the AI-evidence track</span></td><td class="src"><a href="https://www.uscourts.gov/rules-policies">U.S. Courts</a></td><td class="rem">160 d</td></tr>
+      <tr><td class="dt">Tue Mar 2, 2027</td><td>Final approval hearing, <i>Guzman v. Dr. Squatch</i>, 10:00 am Pacific. <span class="mono" style="font-size:10.5px">quoted</span></td><td class="src">Class notice</td><td class="rem">175 d</td></tr>
+      <tr><td class="dt">Jun 30 &amp; Jul 1, 2027</td><td>Washington non-compete provisions take effect. <span class="mono" style="font-size:10.5px">SOURCE CONFLICT, UNRESOLVED. One source cites H.B. 2355 with a Jul 1, 2027 date and a second provision Jun 30, 2027; another cites H.B. 1155 voiding existing agreements Jun 30, 2027 with employee notice due Oct 1, 2027. Verify against the session law.</span></td><td class="src">Conflicting secondary sources</td><td class="rem">~295 d</td></tr>
+      <tr><td class="dt">Tue Aug 31, 2027</td><td>Mead, Colorado 12-month data center moratorium expires, and may terminate early if the staff impact analysis finishes sooner. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">357 d</td></tr>
+      <tr><td class="dt">Fri Oct 1, 2027</td><td>Connecticut Public Act No. 26-15 employment AI notice obligations begin &mdash; written pre-use notice before covered employment decisions made with automated employment-related decision technology. AI use is not a defense to a discrimination complaint; attorney-general enforcement only. <span class="mono" style="font-size:10.5px">See the Oct 1, 2026 row &mdash; the two stages are the subject of an unresolved conflict over where the WARN duty sits.</span></td><td class="src">Conn. P.A. 26-15</td><td class="rem">388 d</td></tr>
+      <tr><td class="dt">Dec 1, 2027 &amp; Dec 1, 2028</td><td>Later pending Federal Rules of Civil Procedure amendments &mdash; effective Dec 1, 2027: Civil Rules 7.1, 26, 41, 45, 81. Effective Dec 1, 2028: Civil Rules 5, 5.2, 6, 55.</td><td class="src">uscourts.gov</td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">September, unset</td><td><b>new</b> &mdash; Gallatin, Tennessee City Council vote on a recommended 12-month data center moratorium. No date scheduled. <span class="mono" style="font-size:10.5px">local ordinance number unverified</span></td><td class="src"><a href="https://fox17.com/news/local/gallatin-leaders-set-to-vote-on-data-center-moratorium">Fox 17</a></td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">TBD</td><td><b>new &middot; Watch.</b> WOTUS supplemental NPRM &mdash; a 30-day comment period runs from Federal Register publication, which had not occurred as of this morning. Calendar it the day it posts.</td><td class="src"><a href="https://www.epa.gov/newsreleases/epa-and-army-seek-additional-input-proposed-waters-us-definition-while-advancing">EPA</a></td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">No date set</td><td>OSHA post-hearing comment period following the August 19&ndash;26 deregulatory hearings on asbestos, benzene, ethylene oxide, cadmium, lead, 13 carcinogens, vinyl chloride, methylene chloride, the General Duty Clause limitation and 19 other standards. The notice creates the period but does not date it. <span class="mono" style="font-size:10.5px">unresolved across three cycles</span></td><td class="src">FR 2026-11126</td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">Unresolved</td><td>MDUFA VI reauthorization docket &mdash; the notice sets two different triggers ("30 days after those documents are made publicly available" and "within 30 days of publication"). Transcript posted August 27. <span class="mono" style="font-size:10.5px">carried forward, still unresolved</span></td><td class="src">Carried forward</td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">Awaiting action</td><td>New York A11560 / S10642, a one-year DEC permitting moratorium on data centers of 20 MW or more, passed June 2026 and awaiting delivery to the Governor. <span class="mono" style="font-size:10.5px">carried forward</span></td><td class="src">Carried forward</td><td class="rem">&mdash;</td></tr>
+      <tr><td class="dt">Closed</td><td><b>Do not run as open.</b> Closed since the last edition: the Westlake TRO and the Galleri delivery-guarantee cutoff both expire today. Previously closed: EPA's PFOA/PFOS biosolids draft guidance and the Colorado AG AI rulemaking input (both September 4); OSHA's reopened carcinogen NPRM windows (asbestos August 21, benzene August 27).</td><td class="src">&mdash;</td><td class="rem">&mdash;</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="flag" style="margin-top:14px"><b>Conflicts a person needs to resolve, not another research pass</b><br>Four are now carrying across three editions: the Connecticut AI stage-one date, the Washington non-compete provisions, the Passaic Valley consent decree close, and the public hearing date buried in the NPDES proposed rule's SUPPLEMENTARY INFORMATION. One resolved this cycle &mdash; the Galleri September 8 and September 16 dates were never in conflict, and the row above says why. <b>The Minnesota PFAS reporting deadline is seven days out, is single-sourced, and is the entry on this page most likely to reach a client as advice.</b> Confirm it with MPCA directly.</div>
+</section>
+<section id="publish">
+  <div class="sec-head"><h2>Worth publishing</h2><span class="count">5 ranked &middot; 4 on the bench</span></div>
+  <div class="notice"><b>Before anything here goes out under the firm's name:</b> every item carrying a verification flag must be confirmed against its primary source first. That applies with force to pitches 1 and 2 &mdash; both rest on single-source reporting behind a paywall, and neither case caption has been confirmed against a docket. A flagged item is publishable; an unverified one is not. <b>None of the five below repeats a pitch from the September 7 edition</b>; the reclassification, component-supplier, AI-sanctions, emergency-ordinance and Connecticut AI pieces from that edition all still stand and are unchanged.</div>
+
+  <div class="pitch">
+    <div class="pnum">1</div>
+    <div>
+      <h3>Not the Pollution Exclusion: How Occupational Disease Language Is Quietly Draining PFAS Coverage</h3>
+      <div class="chips"><span class="chip fmt">Client alert</span><span class="chip fmt">Website article</span><span class="chip">1,200&ndash;1,500 words</span><span class="chip">Manufacturers with PFAS exposure, risk managers, coverage counsel</span><span class="chip">Evergreen with a fresh peg</span></div>
+      <div class="pblock"><b>The peg</b><i>Fire-Dex LLC v. Admiral Insurance Co.</i>, No. 1:23-cv-01612 (N.D. Ohio), decided September 4 &mdash; Judge Brennan held that an occupational-disease exclusion in two CGL policies bars any duty to defend the PFAS suits over firefighter turnout gear.</div>
+      <div class="pblock"><b>The angle</b>PFAS defense strategy across the industry has been built on an assumption that CGL towers will fund the defense while the science is litigated. The exclusion fights everyone anticipated were pollution exclusions, argued on the familiar sudden-and-accidental and total-pollution grounds. This ruling did not turn on any of that. It turned on occupational disease &mdash; language that sweeps in any claim by a worker exposed on the job, which describes a very large share of the PFAS docket in gear, textiles, coatings and AFFF-adjacent equipment. The second-order point is the one worth publishing: a manufacturer auditing its coverage for pollution language is reading the wrong page, and the exclusion that decides the case may be one nobody flagged. Close with a specific instruction &mdash; pull the occupational-disease and bodily-injury-to-workers language from every layer of the tower, not just the pollution endorsements.</div>
+      <div class="works">Why it works: it tells readers to go look at a specific paragraph in a document they already have, which converts to calls better than almost anything else. It also puts the firm at the coverage/toxic-tort seam rather than in the crowded PFAS-update lane.</div>
+    </div>
+  </div>
+
+  <div class="pitch">
+    <div class="pnum">2</div>
+    <div>
+      <h3>The Second Wave Is the Payer: Medicare Secondary Payer Claims Arrive After the Global Settlement</h3>
+      <div class="chips"><span class="chip fmt">Client alert</span><span class="chip fmt">LinkedIn</span><span class="chip">800 words</span><span class="chip">Mass tort defendants, settlement counsel, in-house litigation leadership</span><span class="chip">Shelf life 12+ months</span></div>
+      <div class="pblock"><b>The peg</b>Humana sued Monsanto/Bayer in the District of New Jersey on September 4 to recover Medicare Advantage costs paid for members allegedly injured by Roundup, seeking double damages under the Medicare Secondary Payer Act &mdash; filed while Bayer pursues approval of a reported $7.25 billion global settlement.</div>
+      <div class="pblock"><b>The angle</b>Defendants model mass tort exposure as the tort docket plus the settlement, and treat a global deal as the end of the number. MSP Act claims by Medicare Advantage organizations are not released by settlements with individual claimants, carry a private right of action with double damages, and tend to arrive precisely when a defendant believes it has bought peace. The insight most coverage will miss is about sequencing: the payer suit is filed <i>because</i> a global settlement is near, since the settlement establishes both the injury universe and the defendant's willingness to pay. Any client heading toward global resolution in talc, PFAS, hair relaxer or device litigation should be pricing an MSP tail into the deal rather than discovering it afterward.</div>
+      <div class="works">Why it works: it reframes a familiar story for the exact audience that makes outside-counsel decisions, and the takeaway &mdash; price the MSP tail into the settlement &mdash; is concrete, contrarian, and arrives before most of the market is thinking about it.</div>
+    </div>
+  </div>
+
+  <div class="pitch">
+    <div class="pnum">3</div>
+    <div>
+      <h3>PFOA and PFOS Are Hazardous Substances, Full Stop: What the D.C. Circuit Ruling Does to Allocation</h3>
+      <div class="chips"><span class="chip fmt">Client alert</span><span class="chip">900&ndash;1,100 words</span><span class="chip">Industrial property owners, PRPs, remediation counsel, PFAS supply chain</span><span class="chip">Shelf life 12+ months</span></div>
+      <div class="pblock"><b>The peg</b><i>Chamber of Commerce of the United States v. EPA</i>, No. 24-1193 (D.C. Cir., decided August 18, 2026) &mdash; a unanimous panel upheld EPA's CERCLA &sect; 102(a) designation of PFOA and PFOS against every industry challenge, including the &sect; 102(a) interpretation, the notice-and-comment process and the cost-benefit analysis.</div>
+      <div class="pblock"><b>The angle</b>Most write-ups will report that the designation survived. The useful piece is about what changes downstream now that it is settled rather than contingent. Two things: drinking-water MCLs move toward functioning as ARARs in remediation, which raises cleanup standards at sites that were scoped on the assumption the designation might fall; and allocation among PRPs now runs against parties who never manufactured PFAS at all &mdash; passive landowners, downstream users, publicly owned treatment works receiving industrial influent. The genuinely contrarian note is that the panel itself cautioned its relevance to the parallel drinking-water rule challenge "should not be overstated," which is a line defense counsel should be quoting rather than letting the other side treat this as having decided more than it did.</div>
+      <div class="works">Why it works: it names a case, a court, a statutory provision and a specific practical consequence, and it hands the reader a quotable limiting line from the opinion. That combination is what makes an alert useful to another lawyer rather than merely informative.</div>
+    </div>
+  </div>
+
+  <div class="pitch">
+    <div class="pnum">4</div>
+    <div>
+      <h3>649 Generators and One Question: Clean Air Act Aggregation at Co-Located Data Centers</h3>
+      <div class="chips"><span class="chip fmt">Website article</span><span class="chip">1,000&ndash;1,200 words</span><span class="chip">Data center developers, hyperscaler counsel, utilities, siting and permitting teams</span><span class="chip">Shelf life 18 months</span></div>
+      <div class="pblock"><b>The peg</b>North Carolina DEQ approved air permits on September 1 for 592 emergency generators serving an Amazon data center and 57 temporary Duke Energy units on the same Richmond County site, reviewed as separate projects with non-combined emissions modeling. The Southern Environmental Law Center's July 30 comment letter argues the co-located generators are a single Clean Air Act stationary source.</div>
+      <div class="pblock"><b>The angle</b>Single-source aggregation determines whether a project is a minor source or triggers PSD and Title V &mdash; and therefore the entire permitting posture, the schedule, and whether there is a hook for later citizen-suit and nuisance litigation. It is being decided right now, permit by permit, in state agencies with no national rule and little consistency, and the pattern being set will govern every hyperscaler-plus-utility parcel for years. The second-order point: aggregation is not merely a permitting problem. A finding that the generators are one source creates an emissions record that plaintiffs will later use in diesel particulate exposure claims against the operator. Permitting posture and toxic tort posture turn out to be the same decision, made years apart.</div>
+      <div class="works">Why it works: the firm is building a data center practice, and this is the sophisticated question rather than the moratorium-tracker content everyone else is producing. It pairs naturally with the September 7 edition's emergency-ordinance piece &mdash; procedure and permitting as the two fast attacks &mdash; and demonstrates the environmental-plus-toxic-tort combination that is the firm's actual differentiator.</div>
+    </div>
+  </div>
+
+  <div class="pitch">
+    <div class="pnum">5</div>
+    <div>
+      <h3>A Missing Effective Date Just Cost a Contract Its Bar</h3>
+      <div class="chips"><span class="chip fmt">LinkedIn post</span><span class="chip fmt">Short client alert</span><span class="chip">400&ndash;600 words</span><span class="chip">HR leadership, labor relations, in-house employment counsel</span><span class="chip exp">Perishable &mdash; ~6 weeks</span></div>
+      <div class="pblock"><b>The peg</b><i>Republic National Distributing Company LLC</i>, 375 NLRB No. 30 (Case 16-RD-327720), issued August 26 and published in the Board's weekly summary yesterday &mdash; a 2&ndash;1 Board reversed the Regional Director and held that a CBA lacking a clear effective date does not bar a decertification petition.</div>
+      <div class="pblock"><b>The angle</b>This is the rare labor decision with a one-sentence action item, which is exactly why it travels. The angle is not the doctrine, it is the drafting: employers negotiating first contracts or renewals should be reading their own agreements for an unambiguous effective date, because ambiguity there is now a live route to a decertification election. Note the direction it cuts &mdash; helpful to an employer facing a decert petition, unhelpful to one relying on the bar for stability, which is a nuance most write-ups will flatten. Pair it with an observation others will skip: the same weekly summary shows the Board referring a respondent's representative for investigation of possible misconduct in <i>American Backflow &amp; Fire Prevention</i>, a signal about how closely practitioner conduct is being watched in withdrawal-of-recognition cases.</div>
+      <div class="works">Why it works: short, concrete, immediately shareable, and it gives an HR reader something to check this afternoon. Low effort, high circulation, and it keeps the labor practice visible between larger pieces.</div>
+    </div>
+  </div>
+
+  <div class="bench">
+    <h4>Also on the bench</h4>
+    <ul>
+      <li><b>1,2-dichloropropane and the fenceline scenario.</b> EPA's draft risk evaluation finds unreasonable risk across occupational, consumer and fenceline exposure, and characterizes the substance as "likely to be carcinogenic to humans." A piece on how fenceline findings in TSCA evaluations migrate into toxic tort complaints as general-causation support, with the November 3 comment deadline as the call to action.</li>
+      <li><b>The EEOC's federal-sector overhaul.</b> Comments close September 28 on a rule that ends mandatory counseling, restricts AJ proceedings to appeals and bars administrative adjudication of class complaints. Narrow audience, but federal contractors and agency-facing clients are a real segment and almost nobody is writing about it.</li>
+      <li><b>Be ready for the WOTUS clock.</b> The supplemental notice will open a 30-day comment window the day it hits the Federal Register, which had not happened as of this morning. A short standing-ready piece, drafted now, positions the firm to be first when the notice posts.</li>
+      <li><b>Held over from September 7, still unwritten and still good:</b> the QMSR warning-letter posting lag; the fifteen carcinogen standards with closed comment periods and no hearing dates; the three open DOJ consent decrees most defense readers do not know they can comment on; and H.R. 5437, the stone-slab tort immunity bill, separating what it would do from its actual prospects.</li>
+    </ul>
+  </div>
+</section>
+<section id="epa">
+  <div class="sec-head"><h2>EPA, TSCA, CERCLA and NEPA</h2><span class="count">5 items</span></div>
+  <p class="sec-blurb">EPA's 1,2-dichloropropane draft risk evaluation and the NPDES vessel-exclusion proposed rule were both covered in full on September 7 and are not repeated; they appear in the docket above, where their comment deadlines are live. The four items below were not reached by that edition.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Sep 4, 2026</div><div class="meta">Announced ahead of<br>FR publication</div><span class="badge">Notice</span></div><div class="body">
+      <h3>EPA and the Army reopen comment on the WOTUS definition ahead of a final rule</h3>
+      <p>The agencies announced a supplemental notice of proposed rulemaking seeking further input on regulatory-text options for "waters of the United States," building on the 2025 proposal and aimed at a post-<i>Sackett</i> final rule. The agencies state a 30-day comment period will run from Federal Register publication, which still had not occurred as of this morning.</p>
+      <div class="why"><b>Why it matters</b>WOTUS scope drives Clean Water Act jurisdiction and therefore permitting and enforcement exposure for industrial, agricultural and development clients. A 30-day window is short and will open without warning; the calendar entry should be created the day the notice posts, not the week after.</div>
+      <div class="cite">EPA &middot; <a href="https://www.epa.gov/newsreleases/epa-and-army-seek-additional-input-proposed-waters-us-definition-while-advancing">EPA and Army Seek Additional Input on the Proposed Waters of the U.S. Definition</a></div>
+      <div class="flag"><b>Flag</b><br>No Federal Register document number located and no deadline yet fixed; the 30-day figure comes from the press release, not from a published DATES section. Dated September 4 but not reached by the September 7 edition.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Decided Aug 18<br>Analysis Sep 4</div><div class="meta">No. 24-1193<br>D.C. Cir.<br>Millett, Katsas, Rao</div><span class="badge b-enf">Decision</span></div><div class="body">
+      <h3>D.C. Circuit upholds EPA's designation of PFOA and PFOS as CERCLA hazardous substances</h3>
+      <p>In <i>Chamber of Commerce of the United States v. EPA</i>, No. 24-1193, a unanimous panel rejected industry challenges to EPA's CERCLA &sect; 102(a) designation of PFOA and PFOS, upholding the agency's statutory interpretation, its notice-and-comment process and its cost-benefit analysis. Respondent-intervenors are already citing the ruling in the separate <i>American Water Works Association v. EPA</i> challenge to the 2024 PFAS drinking-water rule, though the panel cautioned that its relevance there "should not be overstated."</p>
+      <div class="why"><b>Why it matters</b>The designation is now settled at the D.C. Circuit rather than contingent, which pushes drinking-water MCLs toward ARAR status in remediation and raises allocation and cost-recovery pressure on everyone in the PFAS supply chain &mdash; including passive property owners and POTWs receiving industrial influent. The panel's own limiting language on the drinking-water challenge is worth quoting rather than conceding.</div>
+      <div class="cite">Gravel2Gavel &middot; <a href="https://www.gravel2gavel.com/dc-circuit-pfas-ruling-regulatory-fight-cercla/">D.C. Circuit PFAS ruling</a> &middot; background at <a href="https://www.hklaw.com/en/insights/publications/2026/08/dc-circuit-upholds-epa-designation-of-pfoa">Holland &amp; Knight</a></div>
+      <div class="flag"><b>Flag</b><br>Reported from practitioner commentary, not the slip opinion, which was not retrieved. Read the opinion before relying on any characterization of the holding. The decision is three weeks old and was not picked up by prior editions.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 4, 2026</div><div class="meta">S.D. Ohio<br>DOJ</div><span class="badge b-enf">Enforcement</span></div><div class="body">
+      <h3>Ohio paint and resin manufacturer pleads guilty over a fatal 2021 plant explosion</h3>
+      <p>Yenkin Majestic Paint Corporation of Columbus pleaded guilty in the Southern District of Ohio, admitting that a newly installed manway door on a resin kettle failed under pressure in an April 8, 2021 explosion that killed one employee and injured others. DOJ states the company did not pressure-test the new part, used an improper gasket, and operated gas detectors without audible alarms.</p>
+      <div class="why"><b>Why it matters</b>Maintenance and process-safety documentation failures following a workplace fatality can convert into criminal exposure, not just OSHA citations. Directly relevant to any manufacturing client's incident-response protocol and its equipment change-control records.</div>
+      <div class="cite">U.S. Department of Justice &middot; <a href="https://www.justice.gov/opa/pr/ohio-company-pleads-guilty-worker-death-case-0">Ohio Company Pleads Guilty in Worker Death Case</a></div>
+      <div class="flag"><b>Flag</b><br>The charging statute and docket number are not stated in the retrieved release. A $500,000 figure appears in a referenced related document but was not independently confirmed &mdash; do not quote the dollar amount without checking.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 4, 2026</div><div class="meta">California<br>Vine Hill Complex</div><span class="badge">Settlement</span></div><div class="body">
+      <h3>California settles with additional companies over the Vine Hill hazardous waste complex</h3>
+      <p>Courthouse News reported that California reached settlements with further companies over historical use of the Vine Hill Complex hazardous waste landfill, where disposal and storage operations ceased in 1989 and which reportedly still poses a threat of release of hazardous substances.</p>
+      <div class="why"><b>Why it matters</b>Legacy landfill users keep drawing contribution and cost-recovery claims decades after site closure &mdash; a standing prompt to review historical waste-disposal records and insurance archives for any client with mid-century California operations.</div>
+      <div class="cite">Courthouse News Service &middot; <a href="https://www.courthousenews.com/articles/california-settles-with-more-companies-over-use-of-hazardous-waste-landfill">California settles with more companies over use of hazardous waste landfill</a></div>
+      <div class="flag"><b>Flag</b><br>Headline only. Repeated fetches returned HTTP 429 rate limiting; the caption, court, docket, settling-defendant names and dollar figures are all unconfirmed. Do not circulate any detail beyond the headline. Worth a retry later today &mdash; the block is rate limiting, not a paywall.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 8, 2026</div><div class="meta">FR 2026-18198<br>Weekly EIS notice</div><span class="badge b-date">Notice</span></div><div class="body">
+      <h3>Today's Federal Register carries the weekly EIS availability notice &mdash; four new NEPA comment clocks</h3>
+      <p>The first Federal Register issue since Friday includes EPA's weekly notice of environmental impact statements filed. Four comment periods relevant to the NEPA practice open or are confirmed: the Homeland Defense Over-the-Horizon Radar Draft EIS for the Northwest Region, Oregon (USAF, closes September 18); the National Elk Refuge Bison and Elk Management Plan Draft EIS, Wyoming (USFWS, October 13); the Northwest Training and Testing Draft Supplement EIS, Washington (Navy and Coast Guard, October 19); and the Shore Road Bridge over the Hutchinson River Draft EIS, New York (FHWA, November 2).</p>
+      <div class="why"><b>Why it matters</b>Routine in themselves, but the weekly EIS notice is the cheapest reliable source of NEPA comment deadlines and the one most often missed. All four dates are now in the docket above.</div>
+      <div class="cite">Federal Register &middot; <a href="https://www.federalregister.gov/documents/2026/09/08/2026-18198/environmental-impact-statements-availability-etc">Environmental Impact Statements; Availability, etc.</a></div>
+    </div></div>
+
+  </div>
+</section>
+
+<section id="fda">
+  <div class="sec-head"><h2>FDA &mdash; drugs, food and cosmetics</h2><span class="count">3 items</span></div>
+  <p class="sec-blurb">The September 7 edition covered the Foods Alive and SUPPLX supplement recalls, the American Regent and B. Braun injectable recalls, the frozen berry outbreak expansion and the neonatal parenteral nutrition compounding guidance. None is repeated here.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Sep 6, 2026</div><div class="meta">Bay Shore, NY<br><i>Listeria monocytogenes</i></div><span class="badge b-enf">Recall</span></div><div class="body">
+      <h3>Made Fresh Salads recalls its entire deli-salad and cream cheese line after environmental Listeria findings</h3>
+      <p>Made Fresh Salads, Inc. recalled 43 varieties of ready-to-eat deli-style salads plus puddings, croquettes and crabcakes, and 27 cream cheese flavors, under the Made Fresh Salads and Northside labels, after FDA and company environmental sampling found <i>Listeria monocytogenes</i> in the facility. Products carry expiration dates of September 3 through 18, 2026 and were delivered directly to retailers and distributors in Brooklyn, Queens, the Bronx and New York City. No illnesses have been reported.</p>
+      <div class="why"><b>Why it matters</b>Repeat environmental findings at a single facility are the fact pattern plaintiffs' counsel use to argue prior notice and failure to remediate. Any client with co-packing or supply relationships to this plant should be pulling its own audit and correspondence file now, before a claim frames the history for them.</div>
+      <div class="cite">FDA &middot; <a href="https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/made-fresh-salads-inc-recalls-ready-eat-deli-style-salads-and-cream-cheese-because-possible-health">Made Fresh Salads, Inc. Recalls Ready-to-Eat Deli-Style Salads and Cream Cheese</a></div>
+      <div class="flag"><b>Flag</b><br>Recall class is not stated on FDA's notice page. The reported characterization that this is the third Listeria recall from this facility in under a year comes from trade press (Food Poison Journal), not from FDA's enforcement report database, and was not independently verified &mdash; that claim is the load-bearing one for a notice argument, so confirm it before use. Dated September 6 and inside the prior edition's window, but not reported there.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 8, 2026</div><div class="meta">MOU dated Aug 31</div><span class="badge b-neg">Commentary</span></div><div class="body">
+      <h3>FDA and SEC formalize an information-sharing memorandum of understanding</h3>
+      <p>The FDA Law Blog reports that FDA and the SEC signed a memorandum of understanding establishing designated-contact channels for sharing nonpublic regulatory information between the agencies. The post flags that this gives the SEC more systematic access to FDA's internal regulatory records concerning public life-sciences companies.</p>
+      <div class="why"><b>Why it matters</b>For public-company clients, any gap between FDA-facing submissions and investor-facing disclosure becomes materially easier for the SEC to find, and the resulting record is discoverable in downstream securities and product liability litigation. Worth raising with clients whose regulatory affairs and investor relations functions do not currently review each other's statements.</div>
+      <div class="cite">Hyman, Phelps &amp; McNamara &middot; <a href="https://www.thefdalawblog.com/2026/09/fda-and-sec-compare-notes-what-the-new-mou-means-for-fda-regulated-public-companies/">FDA and SEC Compare Notes</a></div>
+      <div class="flag"><b>Flag</b><br>Practitioner commentary, not a primary-source document. The MOU text was not retrieved and its August 31 date comes from the blog post.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">As of Sep 8<br>8:30 am ET</div><div class="meta">Negative finding</div><span class="badge b-neg">Enforcement</span></div><div class="body">
+      <h3>The warning letter batch the last edition expected today has not posted yet</h3>
+      <p>The September 7 edition noted that the next FDA warning letter posting batch was expected September 8. As of 8:30 am ET the index still shows the September 1 batch as most recent &mdash; ten letters, all CDER, pharma or FSVP matters, covering underlying letter dates of August 4 through 27. No device or CDRH letters appear.</p>
+      <div class="why"><b>Why it matters</b>Reported so the expectation is closed out rather than left hanging. FDA typically posts later in the day, so the batch may well appear after this brief goes out &mdash; worth a second look this afternoon, particularly for any QMSR letter.</div>
+      <div class="cite">FDA &middot; <a href="https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters">Warning Letters index</a></div>
+    </div></div>
+
+  </div>
+</section>
+<section id="device">
+  <div class="sec-head"><h2>Medical devices and QMSR</h2><span class="count">5 items</span></div>
+  <p class="sec-blurb">The September 7 edition covered the three-reclassification picture, the Bard and Cardinal Health component recalls, the other Class 2 recalls and the AI-enabled device list refresh. This edition adds a re-verification, a resolved date conflict, and two closed research gaps.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Effective Sep 16</div><div class="meta">FR 2026-16727<br>FDA-2025-N-1243<br>21 CFR Part 864</div><span class="badge b-enf">Countdown</span></div><div class="body">
+      <h3>Reclassification clock: eight days, and the Federal Register record re-verified</h3>
+      <p>No change to the substance reported on September 7 &mdash; ISH test systems used with a corresponding approved oncology therapeutic (codes MVD, NYQ, OWE, PNK) move from Class III to Class II with special controls on September 16, and products already marketed under an approved PMA may continue under that authorization. Re-checked against the Federal Register API this morning: publication date August 17, 2026, docket FDA-2025-N-1243, amending 21 CFR Part 864, DATES reading in full "This order is effective September 16, 2026. See further discussion in section IV, 'Implementation Strategy.'"</p>
+      <div class="why"><b>Why it matters</b>Eight days. The two open proposals &mdash; digital breast tomosynthesis (comments close October 9) and diagnostic endoscopic light source systems (October 16) &mdash; are the remaining chances to be heard, and both carry the same preemption consequence. Manufacturers in any of the three categories should know today which of their own products sit on which side of the transition line.</div>
+      <div class="cite">Federal Register &middot; <a href="https://www.federalregister.gov/documents/2026/08/17/2026-16727/hematology-and-pathology-devices-reclassification-of-in-situ-hybridization-test-systems-for-use-with">FR 2026-16727</a></div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Resolved<br>this cycle</div><div class="meta">FDA-2026-N-8004</div><span class="badge b-date">Date conflict</span></div><div class="body">
+      <h3>The Galleri advisory-committee dates were never in conflict</h3>
+      <p>FDA's advisory committee calendar page states that comments received by <b>September 8</b> are guaranteed to reach the Molecular and Clinical Genetics Panel before its September 23 meeting, and that the docket itself closes <b>September 16</b>. These are two different things &mdash; a delivery guarantee and a docket close &mdash; not competing readings of one deadline, which is how the two dates came to look like a conflict across prior editions.</p>
+      <div class="why"><b>Why it matters</b>Practically: if a client wants the panel to actually read its comment on the Galleri PMA, today is the day. Filing between September 9 and 16 still enters the docket but carries no assurance the panel sees it before it votes.</div>
+      <div class="cite">FDA &middot; <a href="https://www.fda.gov/advisory-committees/advisory-committee-calendar/september-23-2026-molecular-and-clinical-genetics-panel-medical-devices-advisory-committee-meeting">September 23, 2026 Molecular and Clinical Genetics Panel Meeting</a></div>
+      <div class="flag"><b>Flag &mdash; partial resolution only</b><br>The September 17 figure read from the FR meeting notice (FR 2026-16245) in an earlier cycle is still unreconciled against the calendar's September 16. September 16 remains the safe date.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Gap closed</div><div class="meta">JPML Sep 24 session</div><span class="badge">MDL</span></div><div class="body">
+      <h3>Closing a declared gap: the JPML September argument calendar, retrieved</h3>
+      <p>The September 7 edition recorded that only the MDL 3196 withdrawal was retrievable from the September 24 hearing session and that the full petition list was not. It is now confirmed: the session lists two separate centralization petitions &mdash; <i>In re: Abbott Laboratories Spinal Cord Stimulator Products Liability Litigation</i> (proposed MDL 3194) and <i>In re: Nevro Corporation Spinal Cord Stimulator Products Liability Litigation</i> (proposed MDL 3195) &mdash; for oral argument in Chicago. Districts of origin span C.D., E.D. and N.D. Cal., N.D. Ill., D. Md., D.N.J. and N.D.N.Y. for Abbott, and N.D. Cal., D. Colo., D. Md., D.N.M., N.D. Ohio and D.S.C. for Nevro.</p>
+      <div class="why"><b>Why it matters</b>Manufacturers are facing per-defendant spinal cord stimulator petitions rather than one industry-wide proceeding &mdash; the structure defendants argued for, on the ground that these devices share no common signature defect across manufacturers. The Panel already centralized Boston Scientific separately into MDL 3181, which stood at 29 pending actions on September 1. A split docket structure would substantially vindicate that argument.</div>
+      <div class="cite">JPML &middot; <a href="https://www.jpml.uscourts.gov/hearing-information">Hearing information</a> &middot; <a href="https://www.jpml.uscourts.gov/sites/jpml/files/Hearing%20Session%20Filed_September%202026.pdf">September 2026 hearing session order</a></div>
+      <div class="flag"><b>Flag</b><br>The issuance date of the hearing-session order itself could not be confirmed; only a related docket entry dated August 14 and the September 24 hearing date were verified.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Report dated<br>Sep 1, 2026</div><div class="meta">JPML own figures<br>Gap closed</div><span class="badge b-neg">Report</span></div><div class="body">
+      <h3>Closing a second gap: device and mass tort actions-pending counts from the Panel's own report</h3>
+      <p>Device dockets: Bair Hugger (MDL 2666, D. Minn., Ericksen) 8,433; Cook Medical IVC Filters (MDL 2570, S.D. Ind., Young) 6,501; Bard Implanted Port Catheter (MDL 3081, D. Ariz., Campbell) 3,734; Exactech Polyethylene Orthopedic Products 1,838; AngioDynamics/Navilyst Port Catheter (MDL 3125, S.D. Cal.) 428; DePuy ASR Hip (MDL 2197, N.D. Ohio) 113; Stryker LFIT V40 (MDL 2768, D. Mass.) 47; Boston Scientific SCS (MDL 3181, C.D. Cal., Staton) 29; Stryker Rejuvenate/ABG II (MDL 2441, D. Minn.) 6; Zimmer M/L Taper (MDL 2859, S.D.N.Y.) 1; Smith &amp; Nephew BHR (MDL 2775, D. Md.) 0. Mass tort dockets: J&amp;J Talcum Powder 69,250; AFFF/PFAS 15,264; <b>Hair Relaxer Marketing 12,129</b>; Roundup 3,925.</p>
+      <div class="why"><b>Why it matters</b>The hair relaxer figure closes the September 7 edition's declared gap, where no reliable MDL 3060 count could be sourced and aggregator numbers were excluded. All figures here are the Panel's own and can go into a client memo or a reserve calculation as such.</div>
+      <div class="cite">JPML &middot; <a href="https://www.jpml.uscourts.gov/sites/jpml/files/Pending_MDL_Dockets_By_Actions_Pending-September-1-2026.pdf">Pending MDL Dockets by Actions Pending, September 1, 2026</a></div>
+      <div class="flag"><b>Flag</b><br>Report dated September 1. Figures are a week old and the Panel updates monthly.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Window review</div><div class="meta">QMSR + preemption</div><span class="badge b-neg">No change</span></div><div class="body">
+      <h3>QMSR and preemption doctrine: nothing moved, and the baseline holds</h3>
+      <p><b>QMSR.</b> No new warning letter, no enforcement-discretion statement, no &sect; 820.45 interpretive guidance. The QMSR landing page and FAQ both still carry a February 2, 2026 last-updated date. The premarket QMS guidance (FDA-2025-D-4051) was confirmed still in draft. Linemaster, Koven and Nipro Renal remain the complete public set.</p>
+      <p><b>Preemption.</b> No movement on any tracked thread &mdash; &sect; 360k(a) and <i>Riegel</i>, the parallel-claim pleading split, <i>Lohr</i> and 510(k), <i>Buckman</i>, failure-to-report, or the de novo / Class II line. The September 7 edition set out each thread's state of play in detail and that treatment stands unchanged; nothing this cycle requires amending it. The <i>Schmidt v. Dexcom</i> correction from that edition also stands: <b>the caption could not be located and should not be cited until someone confirms it on Westlaw or PACER.</b></p>
+      <div class="why"><b>Why it matters</b>On QMSR, the roughly 25-day issue-to-post lag means "no new letter observed on September 8" is a statement about the index, not about FDA's activity in August. Do not let a client read it as an all-clear. On preemption, the thread most likely to produce the next real development remains the argument extending <i>Monsanto v. Durnell</i>'s FIFRA-to-&sect; 360k analogy to 510(k) devices with special controls &mdash; still advocacy, no court has adopted it, and being early on it is worth more than being right about it.</div>
+      <div class="cite"><a href="https://www.fda.gov/medical-devices/quality-management-system-regulation-qmsr/quality-management-system-regulation-frequently-asked-questions">QMSR FAQ</a> &middot; <a href="https://www.druganddevicelawblog.com/">Reed Smith Drug &amp; Device Law</a> &middot; <a href="https://www.supremecourt.gov/opinions/25pdf/24-1068_n7ip.pdf"><i>Monsanto v. Durnell</i> slip opinion</a></div>
+      <div class="flag"><b>Flag</b><br>The <i>Durnell</i> vote alignment could not be reconciled from the source consulted &mdash; a reported 6&ndash;2 does not square with the justices listed in the majority plus a separate Thomas concurrence. Case name, date and core holding are confirmed against the slip opinion; do not state a vote count. CPG 130.300's continued contradiction with the QMSR rule was again not independently re-verified and is carried from the baseline.</div>
+    </div></div>
+
+  </div>
+</section>
+
+<section id="tort">
+  <div class="sec-head"><h2>Toxic tort and product liability</h2><span class="count">2 items</span></div>
+  <p class="sec-blurb">Both items are dated September 4 and neither was reached by the September 7 edition, which reported no verdict, MDL order, settlement or Daubert ruling on any tracked substance. These two are the correction to that.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Sep 4, 2026</div><div class="meta">No. 1:23-cv-01612<br>N.D. Ohio<br>Judge Brennan</div><span class="badge b-enf">Decision</span></div><div class="body">
+      <h3>Insurer escapes the duty to defend a firefighter gear maker in PFAS suits on an occupational-disease exclusion</h3>
+      <p>In <i>Fire-Dex LLC v. Admiral Insurance Co.</i>, No. 1:23-cv-01612 (N.D. Ohio), Judge Bridget Meehan Brennan ruled that Admiral Insurance, a W.R. Berkley unit, owes no coverage to Fire-Dex for the PFAS exposure suits filed over its firefighter turnout gear. The court held that an occupational-disease exclusion in two commercial general liability policies bars coverage.</p>
+      <div class="why"><b>Why it matters</b>Another insurer win in PFAS coverage litigation, and notably not on a pollution exclusion. Occupational-disease language reaches any claim by a worker exposed on the job, which describes much of the PFAS docket in gear, textiles and coatings. Clients should not assume CGL towers will fund PFAS defense, and should audit for this specific language rather than only the pollution endorsements.</div>
+      <div class="cite">Bloomberg Law &middot; <a href="https://news.bloomberglaw.com/product-liability-and-toxics-law/berkley-insurance-unit-sheds-firefighter-pfas-exposure-claims">Berkley Insurance Unit Sheds Firefighter PFAS Exposure Claims</a></div>
+      <div class="flag"><b>Flag</b><br>Single-source and largely paywalled beyond the retrieved snippet. Not corroborated by a second outlet or against the docket. This is pitch 1 in "Worth publishing" &mdash; confirm the holding and the exclusion language before that piece is drafted.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 4, 2026</div><div class="meta">D.N.J.<br>Medicare Secondary<br>Payer Act</div><span class="badge">Filing</span></div><div class="body">
+      <h3>Humana sues Bayer/Monsanto to recover Medicare Advantage costs paid on Roundup injuries</h3>
+      <p>Humana filed suit against Monsanto and Bayer in the District of New Jersey seeking recovery of Medicare Advantage healthcare costs paid for members allegedly injured by Roundup, principally non-Hodgkin lymphoma, invoking the Medicare Secondary Payer Act and seeking double damages. The filing lands while Bayer pursues court approval of a reported $7.25 billion global Roundup settlement.</p>
+      <div class="why"><b>Why it matters</b>A payer recovery track running parallel to the individual tort docket complicates the settlement arithmetic and previews MSP Act exposure for defendants in talc, PFAS, hair relaxer and device litigation. MSP claims are not released by settlements with individual claimants and should be priced into a global deal rather than discovered after it closes.</div>
+      <div class="cite">Bloomberg Law &middot; <a href="https://news.bloomberglaw.com/product-liability-and-toxics-law/humana-sues-monsanto-over-roundup-medicare-cost-recovery">Humana Sues Monsanto Over Roundup Medicare Cost Recovery</a></div>
+      <div class="flag"><b>Flag</b><br>Single-source. The full case caption and docket number were not visible in the retrieved content and could not be corroborated. This is pitch 2 &mdash; confirm before drafting.</div>
+    </div></div>
+
+  </div>
+  <div class="flag"><b>Carried from the last edition, still unresolved</b><br>The <i>Patterson</i> post-trial motions in MDL 3029 (Covidien hernia mesh No. II, D. Mass., Judge Saris) were expected September 4. Whether they were filed still could not be confirmed &mdash; no non-paywalled source reports it and PACER is unavailable. Do not describe the motions as filed, and do not repeat the $88 million verdict figure without a docket check. Also unchanged: the Paragard MDL 2974 Teva defense verdict remains uncorroborated as to date, court and docket, and is still not reported as an item.</div>
+  <div class="flag"><b>Two items cut for date, flagged so they are not silently lost</b><br>A California state-court defense verdict in <i>Van Camp v. Yamaha Corp.</i>, No. 30-2023-01362621-CU-PL-CJC (Orange County Super. Ct.), was returned September 1 and reported September 4 &mdash; single-sourced to CVN. And Boston Scientific's Class I recall of the Infinion CX spinal cord stimulator lead (1,081 serious injuries reported, no deaths) posted September 3. Neither appeared in the September 7 edition either; both are noted here for the record rather than written up.</div>
+</section>
+<section id="emp">
+  <div class="sec-head"><h2>Employment law and litigation</h2><span class="count">4 items</span></div>
+  <p class="sec-blurb">The employment section was omitted from the September 7 edition for want of material &mdash; the most recent NLRB weekly summary available then covered the week of August 3&ndash;7. The summary for August 24&ndash;28 posted yesterday, and the three Board decisions below are its substance.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Issued Aug 26<br>Published Sep 7</div><div class="meta">375 NLRB No. 30<br>Case 16-RD-327720</div><span class="badge">Decision</span></div><div class="body">
+      <h3>Board narrows the contract bar: a CBA without a clear effective date does not block decertification</h3>
+      <p>In <i>Republic National Distributing Company LLC</i>, the Board reversed the Regional Director 2&ndash;1, with Member Prouty dissenting, holding that a collective bargaining agreement lacking a clear effective date does not bar a decertification petition. The case arose at a Houston distribution facility and was pursued by the National Right to Work Legal Defense Foundation on behalf of petitioning employees against Teamsters Local 988.</p>
+      <div class="why"><b>Why it matters</b>A drafting defect with a decertification consequence, and it cuts both ways. It helps an employer facing a decertification petition under an ambiguous agreement; it hurts one relying on the contract bar for stability. Either way, employers negotiating first contracts or renewals should be confirming their agreements state an unambiguous effective date.</div>
+      <div class="cite">NLRB &middot; <a href="https://www.nlrb.gov/cases-decisions/weekly-summaries-decisions/summary-of-nlrb-decisions-for-week-of-august-24-28-2026">Summary of NLRB Decisions, week of August 24&ndash;28, 2026</a> &middot; docket at <a href="https://www.nlrb.gov/case/16-RD-327720">Case 16-RD-327720</a></div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Issued Aug 25<br>Published Sep 7</div><div class="meta">375 NLRB No. 31<br>Case 13-CA-385856</div><span class="badge">Decision</span></div><div class="body">
+      <h3>Board sustains ULP findings against an Illinois contractor and refers its representative for investigation</h3>
+      <p>In <i>American Backflow &amp; Fire Prevention, Inc.</i>, the Board adopted ALJ findings that the Wauconda, Illinois employer committed multiple unfair labor practices &mdash; anti-union signage, discriminatory hiring, unilateral wage and assignment changes, and unlawful withdrawal of recognition &mdash; and ordered bargaining, back pay and removal of the signage. The Board separately referred the respondent's representative for investigation of possible misconduct before the agency.</p>
+      <div class="why"><b>Why it matters</b>Withdrawal of recognition and unilateral changes remain high-risk absent a clean, contemporaneously documented good-faith doubt showing. The separate misconduct referral is the notable part: it signals the Board is scrutinizing practitioner conduct in these cases, not only the employer's.</div>
+      <div class="cite">NLRB &middot; <a href="https://www.nlrb.gov/cases-decisions/weekly-summaries-decisions/summary-of-nlrb-decisions-for-week-of-august-24-28-2026">Weekly summary, August 24&ndash;28, 2026</a></div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Issued Aug 25<br>Published Sep 7</div><div class="meta">375 NLRB No. 29<br>Case 10-CA-367860</div><span class="badge">Decision</span></div><div class="body">
+      <h3>Default judgment against a Georgia franchisee that never answered the complaint</h3>
+      <p>In <i>SKBAR, LLC d/b/a Smoothie King</i> (Statesboro, Georgia), the Board entered default judgment after the employer failed to file an answer, treating as admitted the allegations of discharge for protected activity, threats over the discharge, and unlawful restrictions on employees discussing pay.</p>
+      <div class="why"><b>Why it matters</b>Procedurally unremarkable, but a useful reminder for HR and compliance: missing an NLRB answer deadline converts contested allegations into admitted violations. Franchisees and smaller employers without dedicated labor counsel are where this happens.</div>
+      <div class="cite">NLRB &middot; <a href="https://www.nlrb.gov/cases-decisions/weekly-summaries-decisions/summary-of-nlrb-decisions-for-week-of-august-24-28-2026">Weekly summary, August 24&ndash;28, 2026</a></div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Comments close<br>Sep 28, 2026</div><div class="meta">FR 2026-17641<br>RIN 3046-AB46</div><span class="badge b-date">Proposed Rule</span></div><div class="body">
+      <h3>EEOC's federal-sector EEO overhaul enters its final three weeks of comment</h3>
+      <p>The proposed rule would restructure the federal-employee EEO complaint process: ending mandatory pre-complaint counseling, restricting administrative-judge proceedings to appeals, barring administrative adjudication of class complaints, and imposing 135-day investigation and 30-day decision timelines. The DATES section reads: "Comments must be received on or before September 28, 2026."</p>
+      <div class="why"><b>Why it matters</b>A narrow audience but a real one. Federal contractors and agency-facing clients should be modeling the compressed timelines now, and the class-complaint bar is the structural change most worth commenting on if a client has exposure.</div>
+      <div class="cite">Federal Register &middot; <a href="https://www.federalregister.gov/documents/2026/08/28/2026-17641/federal-sector-equal-employment-opportunity">Federal Sector Equal Employment Opportunity</a></div>
+    </div></div>
+
+  </div>
+  <div class="notice"><b>Overlap items &mdash; both empty for a second consecutive cycle, and both were looked for.</b> Nothing on workers' compensation exclusivity raised in an exposure case, and nothing on OSHA Section 11(c) retaliation riding on an exposure complaint. Two 11(c) matters appear on OSHA's whistleblower page (a Union Pacific injury-reporting case and a USPS mail-carrier matter); the September 7 edition verified those as dated March 6, 2026 and May 8, 2025 respectively, so they are stale rather than new, which resolves an ambiguity this cycle's research could not. The nearest genuine exclusivity items remain <i>Cadena v. City of San Diego</i> (Cal. App., February 2026) and <i>Union Carbide Corp. v. Williams</i> (Ky., take-home asbestos, March 2026).</div>
+</section>
+
+<section id="dc">
+  <div class="sec-head"><h2>Data centers</h2><span class="count">5 items</span></div>
+  <p class="sec-blurb">The September 7 edition covered the Wilmington, Ohio emergency-rezoning suit and the Texas Senate water hearing; neither is repeated. The NC DEQ permits were cut there as pre-window and are carried here with the substance that makes them matter.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Permits Sep 1<br>Objection Jul 30</div><div class="meta">Richmond County, NC<br>NC DEQ</div><span class="badge b-enf">Decision</span></div><div class="body">
+      <h3>North Carolina permits 649 diesel generators across two co-located projects; SELC says they are one source</h3>
+      <p>NC DEQ approved air permits for 592 emergency generators serving an Amazon data center and 57 temporary Duke Energy units at a site near Hamlet, reviewing them as separate projects using worst-case, non-combined emissions modeling. The Southern Environmental Law Center's July 30 comment letter argues the co-located generators should be treated as a single Clean Air Act stationary source, which would trigger stricter review. Roughly 200 residents and environmental groups opposed at a July public hearing.</p>
+      <div class="why"><b>Why it matters</b>Single-source aggregation determines whether a project is a minor source or triggers PSD and Title V, and it is being decided permit by permit with no national rule. The theory SELC is pressing will recur at every parcel where a hyperscaler and its utility site generation together &mdash; and an aggregation finding also builds the emissions record that diesel particulate exposure claims are later made from. This is pitch 4.</div>
+      <div class="cite">WRAL &middot; <a href="https://www.wral.com/business/technology/north-carolina-diesel-generators-amazon-data-center-september-2026/">NC approves diesel generators for Amazon data center</a> &middot; <a href="https://www.selc.org/wp-content/uploads/2026/07/2026-07-30-SELC-comments-on-Amazon-Duke-NC-Permits-with-Exhibits.pdf">SELC comment letter, July 30</a></div>
+      <div class="flag"><b>Flag</b><br>Permits approved September 1. No appeal filed as of retrieval &mdash; this is an agency decision and a live objection, not pending litigation. Do not describe it as a lawsuit.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Hearing today<br>Sep 8, 2026</div><div class="meta">Will County, IL<br>Judge Breslan</div><span class="badge">Filing</span></div><div class="body">
+      <h3>Joliet notice-and-due-process challenge to a $20 billion data center campus reaches a hearing this morning</h3>
+      <p><i>Joliet Residents For Responsible Growth v. City of Joliet</i>, in Will County Circuit Court, was set for hearing at 9:00 am today. Residents allege the February 18 public notice for the Plan Commission meeting failed to describe the project's true scale, that the March 16 council meeting denied due process by barring cross-examination of developer witnesses, and that the agricultural-to-light-industrial rezoning approved 8&ndash;1 on March 19 bears no rational relation to health, safety or welfare. The project is 795 acres, 24 buildings, roughly 6.94 million square feet and 1.8 GW.</p>
+      <div class="why"><b>Why it matters</b>A second procedural-attack template alongside the Wilmington emergency-ordinance suit reported September 7 &mdash; here the theory is notice adequacy rather than the emergency finding. Watch specifically for how the court treats a notice that did not disclose project scale; that is the transferable holding, and it reaches every jurisdiction with a published-agenda requirement.</div>
+      <div class="cite">Shaw Local / Herald-News &middot; <a href="https://www.shawlocal.com/the-herald-news/2026/08/18/lawsuit-against-joliet-data-center-heading-to-court-hearing/">Lawsuit against Joliet data center heading to court hearing</a></div>
+      <div class="flag"><b>Flag</b><br>The hearing is this morning and no outcome is reported. Anyone citing this should check the result first. No docket number retrieved.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Reported<br>Aug 28 / Sep 2</div><div class="meta">Imperial County, CA<br>Judge Jones</div><span class="badge">Decision</span></div><div class="body">
+      <h3>A California developer defeats an emergency data center moratorium on evidentiary grounds</h3>
+      <p>Imperial County Superior Court issued a tentative ruling invalidating the county's emergency data center moratorium, holding the county failed to identify any current or immediate threat to public health, safety or welfare as an emergency ordinance requires. The suit was brought by developer Imperial Valley Computer Manufacturing. The county has said it will bring a revised moratorium to the Board of Supervisors.</p>
+      <div class="why"><b>Why it matters</b>A developer-side precedent on the evidentiary bar a local government must clear to justify an emergency moratorium &mdash; and the mirror image of the Wilmington suit, where a resident attacked an emergency finding used to approve a project. The same doctrine is being run in both directions. It also previews the water-allocation fight in parallel Imperial Irrigation District litigation over cooling water for the same project.</div>
+      <div class="cite"><a href="https://imperialcounty.org/2026/08/icdcmoratorium2026/">Imperial County</a> &middot; <a href="https://calexicochronicle.com/2026/09/02/op-ed-the-unsurprising-failure-of-the-data-center-moratorium/">Calexico Chronicle (op-ed)</a></div>
+      <div class="flag"><b>Flag</b><br>Ruling predates the window; the exact hearing date, final-order date and docket number are unverified, and the second source is an opinion piece rather than straight news. This needs a court-record check before it is relied on in advice.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Sep 8, 2026</div><div class="meta">Gallatin, TN</div><span class="badge">Legislation</span></div><div class="body">
+      <h3>Gallatin planning commission sends a 12-month data center moratorium to the city council</h3>
+      <p>The Gallatin Planning Commission recommended that the City Council adopt a twelve-month moratorium on new data center construction, following resident complaints about noise and utility-capacity impacts. The city currently has no data center-specific zoning restrictions beyond generic siting rules. A council vote is expected in September; no date has been set.</p>
+      <div class="why"><b>Why it matters</b>Another mid-size municipality moving from complaint to formal moratorium, and a useful timeline benchmark for clients assessing siting risk in secondary Southeast markets. Note the trigger was noise, not water or emissions &mdash; low-frequency noise as a health and nuisance claim is a thread worth watching independently.</div>
+      <div class="cite">Fox 17 Nashville &middot; <a href="https://fox17.com/news/local/gallatin-leaders-set-to-vote-on-data-center-moratorium">Gallatin leaders set to vote on data center moratorium</a></div>
+      <div class="flag"><b>Flag</b><br>Local ordinance number unverified; council vote date not yet scheduled.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Comments due<br>Sep 18 &amp; Sep 24</div><div class="meta">NERC / FERC-directed</div><span class="badge b-date">Notice</span></div><div class="body">
+      <h3>NERC reliability standards for large computational loads hit comment deadlines this month</h3>
+      <p>Following a FERC order directing NERC to address bulk-power-system reliability risks from large computational and data center loads, NERC has proposed registry criteria revisions and foundational reliability standards. Comments on the Registry Criteria and Computational Load Reliability Standards close September 18; comments on Disturbance Performance Standards close September 24.</p>
+      <div class="why"><b>Why it matters</b>These standards set the technical and legal baseline for large-load interconnection obligations, which is what future PUC tariff fights and co-location disputes will be argued against. They also pair with the MISO large-load milestones already on the docket for November 16 and December 4 &mdash; ride-through and ramp obligations becoming tariff duties is a compliance-failure theory pleadable against operators.</div>
+      <div class="cite">Stoel Rives Energy Regulatory Update &middot; <a href="https://www.stoel.com/insights/reports/energy-regulatory-updates/september-2-2026">September 2, 2026</a> &middot; background at <a href="https://www.nerc.com/newsroom/ferc-sets-year-end-deadline-for-nerc-to-finalize-registry-criteria-and-standards-for-computational-loads">NERC</a></div>
+      <div class="flag"><b>Flag</b><br>Both deadlines come from a law-firm regulatory update rather than a NERC notice retrieved directly. Confirm against the NERC posting before a client relies on either date.</div>
+    </div></div>
+
+  </div>
+</section>
+<section id="emerging">
+  <div class="sec-head"><h2>Microplastics and emerging exposures</h2><span class="count">2 status changes</span></div>
+  <p class="sec-blurb">The September 7 edition set out the full watch list &mdash; engineered stone silicosis, microplastics, ultra-processed food, artificial turf PFAS, hair relaxer, gas stoves and ethylene oxide &mdash; each labelled by what it actually is. That treatment stands. Only two status lines change this cycle, and both are labelled the same way.</p>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Aug 18, 2026</div><div class="meta">D.C. Cir.<br>No. 24-1193</div><span class="badge b-enf">Decided</span></div><div class="body">
+      <h3>PFAS as a CERCLA hazardous substance &mdash; <span class="mono" style="font-size:12px;color:var(--brick)">DECIDED</span>, and now settled at the D.C. Circuit</h3>
+      <p>The designation of PFOA and PFOS survived industry challenge on every ground (full item in the EPA section above). This moves PFAS remediation exposure from contingent to confirmed for the first time.</p>
+      <div class="why"><b>Why it matters</b>The forward question is no longer whether the designation stands but how MCLs function as ARARs in remediation and how allocation runs against passive owners and downstream users. That is a different set of client conversations from the ones the firm has been having for two years.</div>
+      <div class="cite">See the EPA section above for the item and its flags.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Aug 11, 2026</div><div class="meta">5th Cir.<br>Oldham, Haynes, Ho</div><span class="badge b-enf">Decided</span></div><div class="body">
+      <h3>Gas stoves &mdash; <span class="mono" style="font-size:12px;color:var(--brick)">DECIDED</span>: the Fifth Circuit vacated DOE's stove efficiency rule</h3>
+      <p>A unanimous panel vacated DOE's 2024 gas and electric stove efficiency rule on procedural grounds relating to the direct-final-rule and notice-and-comment process, in a challenge brought by seven states, and remanded to the agency. The September 7 edition recorded gas stoves as FILED, noting the New York ban challenge and a reported health-risk suit heading to trial; this adds the federal regulatory piece.</p>
+      <div class="why"><b>Why it matters</b>Gas stove emissions have been a leading candidate for the next indoor-air exposure theory. A procedural vacatur does not touch the underlying health claims, but it removes a federal regulatory finding that plaintiffs would otherwise have cited as support &mdash; which matters more to the litigation than to the appliance market.</div>
+      <div class="cite">Legal Newsline &middot; <a href="https://www.legalnewsline.com/louisiana-record/bidens-gas-stove-rule-goes-down-in-flames-at-5th-circuit/article_48e8b359-c30d-4519-87e3-b3b33235b772.html">Gas stove rule vacated at Fifth Circuit</a></div>
+      <div class="flag"><b>Flag</b><br>Headline-level detail only. The case caption and docket number were not confirmed and the decision is four weeks old. Do not cite the case without retrieving it.</div>
+    </div></div>
+
+  </div>
+  <div class="notice"><b>Unchanged and still worth stating.</b> Microplastics: the September 7 edition's assessment holds &mdash; suits are FILED but framed as consumer deception rather than personal injury, and whether this becomes a wave depends on whether causation and source-attribution science consolidates. Nothing moved. EPA's Contaminant Candidate List 6, expected November 17, remains the first federal listing to include microplastics and is the citation point to watch. Artificial turf PFAS and ultra-processed food remain where that edition left them, both resting on secondary commentary with no confirmed captions.</div>
+</section>
+
+<section id="congress">
+  <div class="sec-head"><h2>Congress</h2><span class="count">Recess &middot; 1 bill added</span></div>
+  <div class="docket">
+    <div class="entry"><div class="rail"><div class="d">Week of Sep 6&ndash;12</div><div class="meta">Both chambers</div><span class="badge b-neg">Status</span></div><div class="body">
+      <h3>Still in recess; the Senate returns Monday</h3>
+      <p>The House remains in a district work period through September 13. The Senate is holding pro forma sessions only &mdash; today at 1:15 pm ET and Thursday at 3:00 pm, with no business conducted &mdash; and returns to regular business Monday, September 14 at 3:00 pm, with a judicial-nomination cloture vote that evening.</p>
+      <div class="why"><b>Why it matters</b>Nothing tracked can move before September 14, and appropriations will absorb most of the calendar once the Senate returns. Any client anxious about a pending bill can be told accurately that the clock has not been running. The December 11 date on the docket &mdash; when the continuing resolution and TSCA fee authority expire together &mdash; remains the vehicle to watch.</div>
+      <div class="cite"><a href="https://www.house.gov/legislative-activity">House legislative activity</a> &middot; <a href="https://www.dailypress.senate.gov/">Senate Daily Press</a></div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Reported Nov 18, 2025<br>Report filed Jun 15, 2026</div><div class="meta">H.R. 2675<br>H. Rept. 119-700</div><span class="badge">Real momentum</span></div><div class="body">
+      <h3>Added to the tracked list: a foreign litigation-funding disclosure bill with a filed committee report</h3>
+      <p>H.R. 2675, the Protecting Our Courts from Foreign Manipulation Act (Rep. Ben Cline, R-VA), would require disclosure of foreign third-party litigation funding in federal civil cases. House Judiciary ordered it reported 15&ndash;11, tabling a Raskin germaneness amendment 14&ndash;10, and the written report was filed in June. No floor vote has been scheduled.</p>
+      <div class="why"><b>Why it matters</b>This is further along than any of the four bills tracked in the September 7 edition, including its Senate companion S. 3826, which has sat in Judiciary since February with no action. A filed committee report is real momentum, though not passage &mdash; and litigation funding disclosure is exactly the kind of provision that gets attached to a must-pass vehicle in December. If it moves, mass tort and product liability defendants gain meaningful new discovery leverage over plaintiff-side funding arrangements.</div>
+      <div class="cite">GovInfo &middot; <a href="https://www.govinfo.gov/content/pkg/CRPT-119hrpt700/html/CRPT-119hrpt700.htm">H. Rept. 119-700</a> &middot; companion at <a href="https://www.govinfo.gov/app/details/BILLS-119s3826is">S. 3826</a></div>
+    </div></div>
+  </div>
+  <div class="notice"><b>Unchanged from September 7:</b> H.R. 5437 (stone slab tort immunity, subcommittee hearing held, no markup), S. 3826 (litigation funding, introduced only), S. 3460 (PFAS Accountability Act, introduced only) and H.R. 8016 (Forever Chemical Regulation and Accountability Act, introduced only). None saw activity. Several further PFAS, TSCA and AI bill numbers surfaced in this cycle's searching but could not be confirmed as to number, sponsor or introduction date before the research budget ran out; they are deliberately omitted rather than reported unverified.</div>
+</section>
+
+<section id="ai">
+  <div class="sec-head"><h2>AI and legal practice</h2><span class="count">2 items</span></div>
+  <div class="docket">
+
+    <div class="entry"><div class="rail"><div class="d">Filed Sep 1<br>Deadlines Sep 11 / 18</div><div class="meta">MDL 25-md-03143<br>S.D.N.Y. &middot; Judge Stein</div><span class="badge">Filing</span></div><div class="body">
+      <h3>DOJ files a statement of interest backing a "transformative" fair-use position in the OpenAI copyright MDL</h3>
+      <p>In the consolidated <i>In re OpenAI, Inc., Copyright Infringement Litigation</i>, DOJ's Civil Division filed a statement of interest under 28 U.S.C. &sect; 517 arguing that training large language models on copyrighted text is "extraordinarily transformative" fair use. Separately, Judge Stein ordered the New York Times to show cause why its case should not be stayed pending resolution of summary judgment motions in other MDL matters; the Times responds September 11 and defendants reply September 18.</p>
+      <div class="why"><b>Why it matters</b>The government's position is not binding but will be cited in every training-data case going forward, including the product-liability-adjacent theories now being tested against AI developers. The stay question is separately worth watching for how courts manage overlapping AI copyright tracks inside one MDL &mdash; a case-management problem the firm will meet in other mass tort contexts.</div>
+      <div class="cite">Tech Times &middot; <a href="https://www.techtimes.com/articles/326401/20260903/doj-backs-openai-fair-use-claim-ai-copyright-fight-creators-must-try-congress.htm">DOJ backs OpenAI fair use claim</a></div>
+      <div class="flag"><b>Flag</b><br>Reported from secondary coverage; the docket number was not independently confirmed and the filing itself dates to September 1. The forward deadlines are the reason it is carried.</div>
+    </div></div>
+
+    <div class="entry"><div class="rail"><div class="d">Hearing requests<br>Dec 8, 2026</div><div class="meta">U.S. Courts<br>Comments to Feb 15, 2027</div><span class="badge b-date">Proposed Rule</span></div><div class="body">
+      <h3>Federal Rules amendment package: hearing-testimony requests due December 8</h3>
+      <p>The pending package covers Appellate Rule 25; Civil Rules 5, 5.2, 6 and 55; <b>Evidence Rules 104 and 902</b>; Criminal Rules 11, 32, 45, 49 and 49.1; and Bankruptcy Rules 2003, 5005, 8011, 9006, 9036 and 9037. Requests to testify at public hearings are due December 8, 2026; the comment period, already on the docket, closes February 15, 2027.</p>
+      <div class="why"><b>Why it matters</b>Evidence Rules 104 and 902 are the AI-evidence track &mdash; the authentication framework for machine-generated evidence would sit there, and it would reach every case the firm tries. The December 8 date is the one that decides whether the firm has a voice at the hearing rather than only in the written record.</div>
+      <div class="cite">U.S. Courts &middot; <a href="https://www.uscourts.gov/rules-policies">Rules and Policies</a></div>
+      <div class="flag"><b>Flag</b><br>The December 8 date is from the U.S. Courts rules page and was not confirmed against a hearing notice. The specific content of the proposed Rule 104 and 902 amendments still could not be retrieved &mdash; the rule numbers are accurate and the September 7 edition independently identified them as the AI-evidence track, but the text itself remains unread across two cycles.</div>
+    </div></div>
+
+  </div>
+  <div class="notice"><b>No new AI-sanctions decision this cycle &mdash; the standing one is eight days old and still the item to circulate.</b> <i>Douglas v. Deutsche Bank National Trust Co.</i> (D.C. Court of Appeals, September 3) &mdash; brief struck in its entirety, counsel referred to the Office of Disciplinary Counsel, redaction of the four fabricated citations rejected as "effectively no sanction at all" &mdash; was reported in full on September 7 and remains the hardest line any court has taken in this line of cases. It also remains flagged: the slip opinion was not retrieved from the D.C. Courts database and the docket number is unverified. Nothing newer was found in the window.</div>
+</section>
+<section id="quiet">
+  <div class="sec-head"><h2>Quiet this week</h2><span class="count">2 sections omitted &middot; negatives and gaps</span></div>
+  <p class="sec-blurb">Two sections are absent for want of any in-window material: <b>OSHA</b> and <b>class actions</b>. Below is what was actually searched, so a negative here can be relied on rather than re-run. Where the September 7 edition established a negative that still holds, it is noted rather than re-searched.</p>
+  <div class="quiet">
+
+    <div class="qrow"><div class="qk">OSHA<br><span style="color:var(--brick);font-weight:400">Section omitted &mdash; second cycle</span></div><div class="qv">No OSHA item could be confirmed as dated in the window, and the failure is methodological rather than substantive. Repeated fetches of <code>osha.gov/news/newsreleases</code>, the whistleblower release page, <code>osha.gov/deregulatory-rulemaking</code> and <code>osha.gov/calendar</code> returned inconsistent "most recent" dates across attempts, ranging from February to July 2026 &mdash; the pages are serving cached snapshots. The September 7 edition reached the same conclusion independently and additionally verified that the two whistleblower items shown are dated March 6, 2026 and May 8, 2025. <b>The staleness is now confirmed across two cycles and should be treated as a standing tooling problem, not a quiet agency.</b> Also carried from that edition: <code>oshanews.org</code> returned fabricated-looking items with unnamed employers and placeholder URLs and should be treated as untrustworthy.</div></div>
+
+    <div class="qrow"><div class="qk">Class actions<br><span style="color:var(--brick);font-weight:400">Section omitted</span></div><div class="qv">Nothing dated in the window. ClassAction.org's food, privacy, data-breach and settlement categories were fetched directly and all top out at September 1&ndash;3; its Illinois BIPA category has no September entries at all, the most recent being an August 6 HireVue settlement at $3.75 million. The Duane Morris index carried no post after its September 4 TikTok analysis, which the September 7 edition already covered. Searches for <code>class action lawsuit filed food labeling "made with real" OR "all natural" September 2026</code> returned only evergreen aggregator pages; <code>foodbeveragelitigationupdate.com</code> served 2022-dated archive content. No filing with a quotable label phrase was found &mdash; the second consecutive cycle in which the section's stated priority came up empty.</div></div>
+
+    <div class="qrow"><div class="qk">Toxic tort verdicts<br>and Daubert</div><div class="qv">No verdict, MDL order, bellwether result or Daubert ruling on any tracked substance could be dated in the window. Searches for <code>talc verdict September 2026</code>, <code>asbestos verdict September 2026</code>, <code>silicosis engineered stone verdict September 2026</code> and <code>benzoyl peroxide lawsuit MDL September 2026</code> returned only undated plaintiff-firm marketing pages, excluded on principle. Goldberg Segalla's Asbestos Case Tracker tops out at July 27, 2026; Alston &amp; Bird's Mass &amp; Toxic Tort Tracker at March 2026. The last reported talc bellwether verdict remains March 22, 2026 ($40M compensatory, $0 punitive, JCCP 4872, L.A. County Superior Court). The two coverage and payer items reported above are litigation developments but not verdicts.</div></div>
+
+    <div class="qrow"><div class="qk">Substances &mdash; regulatory</div><div class="qv">Carried from the September 7 edition's Federal Register term sweeps, none of which this cycle's reading contradicts: talc, PFAS (beyond the Commerce antidumping notices on perfluoroalkoxy alkane imports, which are trade law), benzene, silica, ethylene oxide, benzoyl peroxide and asbestos all returned no new agency action. This cycle's epa.gov-restricted searches for <code>EPA ethylene oxide OR benzoyl peroxide OR silica rule September 2026</code> and <code>EPA microplastics OR nanoplastics OR talc announcement September 2026</code> likewise returned only prior-dated background pages.</div></div>
+
+    <div class="qrow"><div class="qk">FDA &mdash; talc, benzene,<br>PFAS packaging, MoCRA</div><div class="qv">Nothing new. The most recent FDA talc action remains the November 2025 withdrawal of the proposed asbestos-testing-methods rule. Benzoyl peroxide and benzene results all trace to 2025 recalls. No new PFAS food-packaging announcement and no MoCRA enforcement or guidance.</div></div>
+
+    <div class="qrow"><div class="qk">Device preemption</div><div class="qv">All six doctrinal threads checked and clear. Queries included <code>Schmidt v. Dexcom preemption September 2026</code>, <code>Higginbottom preemption medical device decision 2026</code>, <code>Glover failure to report Connecticut preemption device 2026</code> and circuit-specific searches for the Fifth, Sixth and Eighth Circuits. Reed Smith's Drug &amp; Device Law blog published nothing on point in the window. The <i>Schmidt v. Dexcom</i> caption still could not be located, consistent with the September 7 correction.</div></div>
+
+    <div class="qrow"><div class="qk">Employment regulatory<br>beyond the NLRB</div><div class="qv">EEOC's newsroom had nothing dated September 3&ndash;8; the most recent items are September 1&ndash;2 (Ford Motor Co. $2.3M harassment settlement; Damar Services $65,000 disability settlement). No DOL Wage and Hour opinion letter since the July 22 batch. No OFCCP rule, effective date or enforcement action in the window &mdash; note the September 7 edition recorded an errored Federal Register agency query here as a gap, and the OFCCP dates now on the docket were sourced separately. No new FTC Section 5 non-compete activity. Nothing new on <i>Mobley v. Workday</i>.</div></div>
+
+    <div class="qrow"><div class="qk">Federal Register</div><div class="qv">No issue published Monday, September 7 (Labor Day). Today's September 8 issue produced the weekly EIS availability notice reported above and no OSHA, EEOC or NLRB documents. The September 4 issue was covered in the prior edition.</div></div>
+
+    <div class="qrow"><div class="qk">EU MDR/IVDR, MDUFA,<br>greenwashing, Legionella,<br>algorithmic pricing</div><div class="qv">No window-specific EU MDR or IVDR development affecting US manufacturers. MDUFA VI remains at the draft-commitment-letter and public-meeting stage from July&ndash;August with no new movement, and its docket-close trigger is still unresolved. No greenwashing ruling newer than a March 2026 Apple "carbon neutral" decision. No data-center-specific Legionella case or outbreak. Algorithmic pricing searches returned only background and settlement recaps.</div></div>
+
+    <div class="qrow"><div class="qk">Declared gaps<br>this cycle</div><div class="qv">The session-wide web search budget was exhausted partway through the run, which cut off cross-verification of the single-sourced Fire-Dex and Humana items and of several bill numbers. The Courthouse News article on the Vine Hill settlements was rate-limited (HTTP 429) and should be retried later today. The Imperial County tentative ruling has no confirmed docket or final-order date. The Joliet hearing outcome is not yet public. Carried gaps still open from September 7: the <i>Schmidt v. Dexcom</i> caption; the <i>Douglas v. Deutsche Bank</i> slip opinion and docket number; the <i>Patterson</i> post-trial motions in MDL 3029; the Paragard MDL 2974 defense verdict details; and the public hearing date inside the NPDES proposed rule.</div></div>
+
+  </div>
+</section>
+
+</div>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <h4>Method and window</h4>
+      <p>Eight parallel research passes &mdash; EPA and the Federal Register; FDA drugs, food and cosmetics; device regulatory and QMSR; device litigation and preemption; OSHA and employment regulatory; toxic tort, product liability and employment litigation; class actions, emerging exposures and Congress; data centers and AI in legal practice. Each pass verified its own leading items against a primary source before reporting and quoted DATES sections verbatim where a deadline was involved.</p>
+      <p>The coverage window runs Monday, September 7 at 8:00 am ET to Tuesday, September 8 at 8:30 am ET, picking up exactly where the Labor Day edition closed. Six items dated September 1 through 6 are carried anyway because that edition did not reach them; each says so in place. Material that edition covered in full is not repeated, and where it carries a live date it appears in the docket only.</p>
+    </div>
+    <div>
+      <h4>Limits on this edition</h4>
+      <ul>
+        <li>OSHA could not be read reliably for a second consecutive cycle; osha.gov is serving cached pages with inconsistent dates. Treat the absent OSHA section as a tooling gap, not a quiet agency.</li>
+        <li>The web search budget was exhausted partway through the run, which cut off cross-verification of several single-sourced items late in the cycle. Those items carry flags.</li>
+        <li>Twenty items carry verification flags. Nothing flagged should go out under the firm's name without a primary-source check.</li>
+        <li>Four date conflicts are now carrying across three editions and need a person rather than another research pass. One resolved this cycle.</li>
+        <li>Congressional bill numbers that could not be confirmed were omitted rather than reported.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Sourcing rules applied</h4>
+      <p>Plaintiff-firm marketing pages that publish undated evergreen "current month update" content &mdash; TorHoerman, Drugwatch, Lawsuit Information Center, Miller &amp; Zois, Sokolove, aboutlawsuits, mdlupdate, Top Class Actions &mdash; are excluded as sources for any caption, docket, figure or date. Several searches returned nothing else and are reported as negatives rather than filled from those pages.</p>
+      <p>MDL case counts come only from the JPML's own pending-actions PDF. Paywalled sources are used for headline confirmation only and identified as paywalled. Calculated deadlines are distinguished from quoted ones. A flagged item is included because a flagged item is more useful than a smoothed-over one &mdash; but nothing carrying a flag should leave the firm without a primary-source check first.</p>
+    </div>
+  </div>
+  <div class="colophon">CMBG3 Law &middot; Regulatory and Litigation Desk &middot; Tuesday, September 8, 2026 &middot; Coverage window Monday, September 7, 8:00 am to Tuesday, September 8, 8:30 am ET &middot; Prepared for internal circulation &middot; Permanent link, updated each publication day</div>
+</div></footer>
+
+<script>
+(function(){
+  var b=document.getElementById('tbtn');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var r=document.documentElement;
+    var cur=r.getAttribute('data-theme');
+    if(!cur){
+      var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+      cur=dark?'dark':'light';
+    }
+    r.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  });
+})();
+</script>
+</body>
+</html>
